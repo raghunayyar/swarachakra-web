@@ -1,0 +1,17 @@
+<h1>New CSV</h1>
+<ul>
+	<li>Allows upload of CSV files. A post request to /admin/upload</li>
+	<li>Drag and Drop (Low Priority)</li>
+</ul>
+<fieldset class="hero-unit center" id="signin">
+	<h1>New CSV</h1>
+		<%= form_for(@csv, :html => { :class => 'form form-horizontal', :multipart => true }) do |f| %>
+		<div class="form-group">
+			<%= f.label :name, :class =>'bold' %>
+			<%= f.text_field :name, :class => 'input', :id => 'languageinput' %>
+		</div>
+
+		<%= f.submit "Sign in", :class => "btn btn-large btn-primary", :id => 'adminsubmit' %>
+		<%= link_to 'Back', '/', :class=> 'btn btn-danger admin' %>
+	<% end %>
+</fieldset>

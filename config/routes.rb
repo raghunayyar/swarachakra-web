@@ -1,21 +1,26 @@
 Rails.application.routes.draw do
 
+  root 'home#index'
+
+  # All Resources
+  resource :csv
+
+  # All Admin Related URIs are here.
+  get 'admin/new'
   get 'admin/dashboard'
 
-  get 'admin/upload'
+  match '/admin/upload', to: 'admin#upload', via: 'post'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  # root 'welcome#index'
-  root 'home#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
   get 'home/index'
   get 'home/login'
 
+  match '/login', to: 'home#login', via: 'get'
+  match '/login', to: 'home#login', via: 'post'
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
 
