@@ -1,0 +1,17 @@
+<fieldset class="hero-unit center" id="signin">
+	<h1>Swarachakra Admin</h1>
+		<%= form_for(:session, :html => { :class => 'form form-horizontal' }) do |f| %>
+		<div class="form-group">
+			<%= f.label :name, :class =>'bold' %>
+			<%= f.text_field :name, :class => 'admin input', :id => 'adminlogin' %>
+		</div>
+
+		<div class="form-group">
+			<%= f.label :password, :class => 'bold' %>
+			<%= f.password_field :password, :class => 'admin input', :id => 'adminpassword' %>
+		</div>
+
+		<%= f.submit "Sign in", :class => "btn btn-large btn-primary", :id => 'adminsubmit' %>
+		<%= link_to 'Back', '/', :class=> 'btn btn-danger admin' %>
+	<% end %>
+</fieldset>

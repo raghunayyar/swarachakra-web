@@ -13,3 +13,33 @@
  *= require_tree .
  *= require_self
  */
+
+@import "bootstrap-sprockets";
+@import "bootstrap";
+
+body {
+	font-family: 'Open Sans', sans-serif;
+	font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-weight:400;
+}
+
+.hero-unit {
+	padding:50px 0;
+	margin: 50px auto;
+	width:350px;
+	text-align:center;
+}
+
+.hero-unit .form-group {
+	margin-top:20px;
+	margin-bottom:20px;
+}
+
+.hero-unit label {
+	width: 100px;
+	text-align: right;
+	margin: 3px;
+}

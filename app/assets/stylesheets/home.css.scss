@@ -1,0 +1,15 @@
+// Place all the styles related to the Home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#signupform {
+	form {
+		label {
+			text-align: right;
+			float: left;
+		}
+		input[type="text"],input[type="password"], input[type="email"] {
+			float:right;
+		}
+	}
+}
