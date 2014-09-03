@@ -1,0 +1,15 @@
+{
+  "name": "Swarachakra for Web",
+  "version": "0.1",
+  "dependencies": {
+    "angular": "",
+    "restangular": "",
+    "angular-mocks": "",
+    "angular-route": "",
+    "angular-animate": "",
+    "fontawesome": ""
+  },
+  "devDependencies": {
+	"angular-mocks": ""
+  }
+}
