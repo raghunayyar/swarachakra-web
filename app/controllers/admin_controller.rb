@@ -4,6 +4,7 @@ class AdminController < ApplicationController
   # URI : /admin/dashboard
   # Use : Displays table of CSVs. 
   def dashboard
+    @languages = Language.all
   end
 
   # Request : GET
