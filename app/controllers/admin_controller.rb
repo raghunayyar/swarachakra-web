@@ -4,18 +4,19 @@ class AdminController < ApplicationController
   # URI : /admin/dashboard
   # Use : Displays table of CSVs. 
   def dashboard
-  	@csv = Admin.all
   end
 
   # Request : GET
   # URI /admin/dashboard
   # Use : Page to upload new CSV
   def new
-  	@csv = Admin.new
+  	# @csv = Admin.new
   end
 
   # Request : POST
   # URI : /admin/upload
   def upload
+    # TODO: Redirect only if request is succesful.
+    redirect_to action: 'dashboard'
   end
 end
