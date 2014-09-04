@@ -17,6 +17,10 @@ class AdminController < ApplicationController
   # URI : /admin/upload
   def upload
     # TODO: Redirect only if request is succesful.
+    uploaded_io = params[:file]
+    File.open(Rails.root.join('uploads', 'languages', uploaded_io.original_filename), 'wb') do |file|
+      file.write(uploaded_io.read)
+    end
     redirect_to action: 'dashboard'
   end
 end
