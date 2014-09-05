@@ -2,8 +2,8 @@
 	<h1>New CSV</h1>
 </div>
 <div class="hero-unit" id="newpage">
-	<%= form_tag({:action => :upload}, multipart: true) do %>
-  		<%= file_field_tag 'file', :class =>'uploadcsv', multiple: false, accept: '.csv' %>
-  		<%= submit_tag "Add CSV", :class => 'btn btn-primary', :id => 'uploadsubmit' %>
+	<%= form_for @languages, :url => {:action => :upload}, multipart: true do |f| %>
+  		<%= f.file_field 'file', :class =>'uploadcsv', multiple: false, accept: '.csv' %>
+  		<%= f.submit "Add", :class => 'btn btn-primary', :id => 'uploadsubmit' %>
 	<% end %>
 </div>

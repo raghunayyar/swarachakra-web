@@ -11,17 +11,31 @@ class AdminController < ApplicationController
   # URI /admin/dashboard
   # Use : Page to upload new CSV
   def new
-  	# @csv = Admin.new
+  	@languages = Language.new
+  end
+
+  def show
+    @languages = Language.find(params[:id])
   end
 
   # Request : POST
   # URI : /admin/upload
   def upload
     # TODO: Redirect only if request is succesful.
-    uploaded_io = params[:file]
-    File.open(Rails.root.join('uploads', 'languages', uploaded_io.original_filename), 'wb') do |file|
-      file.write(uploaded_io.read)
+    csv = params[:file]
+    @languages = Language.new(csv) do |t|
+        t.name  = @original_filename
+        t.path = 'blah'
+        t.enabled = false
     end
-    redirect_to action: 'dashboard'
+    if @languages.save
+      redirect_to action: 'dashboard'
+    else
+      redirect_to 'new'
+    end
   end
+  private
+    def upload_params
+      params.require(:file).permit(:name, :path, :enabled)
+    end
 end
