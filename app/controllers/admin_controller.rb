@@ -22,16 +22,19 @@ class AdminController < ApplicationController
   # URI : /admin/upload
   def upload
     # TODO: Redirect only if request is succesful.
-    csv = params[:file]
-    @languages = Language.new(csv) do |t|
-        t.name  = @original_filename
-        t.path = 'blah'
-        t.enabled = true
-    end
-    if @languages.save
-      redirect_to action: 'dashboard'
-    else
-      redirect_to 'new'
+    csv = params[:language][:file]
+    File.open(Rails.root.join('uploads', 'languages', csv.original_filename), 'wb') do |file|
+      file.write(csv.read)
+      @languages = Language.new(upload_params) do |t|
+          t.name  = csv.original_filename
+          t.path = 'blah'
+          t.enabled = true
+      end
+      if @languages.save
+        redirect_to action: 'dashboard'
+      else
+        redirect_to 'new'
+      end
     end
   end
 
@@ -44,6 +47,6 @@ class AdminController < ApplicationController
   end
   private
     def upload_params
-      params.require(:file).permit(:name, :path, :enabled)
+      params.require(:language).permit(:name, :path, :enabled)
     end
 end
