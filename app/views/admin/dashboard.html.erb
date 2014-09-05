@@ -1,6 +1,7 @@
 <div class="page-header">
 	<h1>The dashboard</h1>
 </div>
+<!-- TODO: Add Link to New Page -->
 <table class="table">
 	<thead>
 		<th>Name</th>
@@ -13,9 +14,19 @@
 			<tr>
 				<td><%= language.name %></td>
 				<td><%= language.path %></td>
-				<td><%= language.enabled %></td>
-				<td><i class="fa fa-remove"></i></td>
+				<td><%= check_box_tag 'accept', language.enabled, language.enabled %></td>
+				<td>
+				<button class="btn btn-danger btn-xs" class="deletecsv" id="deletecsv">
+					<span class="fa fa-remove"></span>
+				</button>
+				</td>
 			</tr>
 		<% end %>
 	</tbody>
 </table>
+<!--
+<button type="button" id="savechanges" class="btn btn-success btn-block btn-lg">
+	<span class="fa fa-refresh"></span>Save Changes
+</button>
+
+-->

@@ -26,13 +26,21 @@ class AdminController < ApplicationController
     @languages = Language.new(csv) do |t|
         t.name  = @original_filename
         t.path = 'blah'
-        t.enabled = false
+        t.enabled = true
     end
     if @languages.save
       redirect_to action: 'dashboard'
     else
       redirect_to 'new'
     end
+  end
+
+  # Request : DELETE
+  # URI : /admin/destroy
+  def destroy
+    @languages = Language.find(params[:id])
+    @languages.destroy
+    redirect_to 'dashboard'
   end
   private
     def upload_params
