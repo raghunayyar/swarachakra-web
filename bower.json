@@ -6,8 +6,7 @@
     "restangular": "",
     "angular-mocks": "",
     "angular-route": "",
-    "angular-animate": "",
-    "fontawesome": ""
+    "angular-animate": ""
   },
   "devDependencies": {
 	"angular-mocks": ""
