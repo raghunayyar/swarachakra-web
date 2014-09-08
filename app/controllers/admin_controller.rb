@@ -27,7 +27,7 @@ class AdminController < ApplicationController
       file.write(csv.read)
       @languages = Language.new(upload_params) do |t|
           t.name  = csv.original_filename
-          t.path = 'blah'
+          t.path = 'uploads/languages/'+ t.name
           t.enabled = true
       end
       if @languages.save
