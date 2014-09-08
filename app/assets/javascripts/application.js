@@ -15,5 +15,6 @@
 //= require angular/angular
 //= require angular-animate/angular-animate
 //= require angular-route/angular-route
+//= require lodash/dist/lodash
 //= require restangular/dist/restangular
-//= require_tree .
+//= require_tree .//public

@@ -17,4 +17,5 @@
 
 #Uploaded files
 uploads/
+node_modules/
 vendor/assets/components

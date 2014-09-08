@@ -1,0 +1,23 @@
+{
+	"name": "Swarachakra",
+	"description": "Swarachakra for the web",
+	"version": "0.0.1",
+	"author": {
+		"name": "Raghu Nayyar",
+		"email": "beingminimal@gmail.com"
+	},
+	"contributors": [],
+	"dependencies": {},
+	"devDependencies": {
+		"bower": "*",
+		"grunt": "*",
+		"grunt-cli": "*",
+		"coffee-script": "*",
+		"grunt-contrib-coffee": "*",
+		"grunt-contrib-concat": "*",
+		"grunt-contrib-watch": "*",
+		"grunt-coffeelint": "*",
+		"grunt-wrap": "*"
+	},
+	"engine": "node >= 0.8"
+}
