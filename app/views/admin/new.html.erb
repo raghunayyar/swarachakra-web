@@ -3,7 +3,8 @@
 </div>
 <div class="hero-unit" id="newpage">
 	<%= form_for @languages, :url => {:action => :upload}, multipart: true do |f| %>
-  		<%= f.file_field 'file', :class =>'uploadcsv', multiple: false, accept: '.csv' %>
-  		<%= f.submit "Add", :class => 'btn btn-primary', :id => 'uploadsubmit' %>
+		<%= f.file_field 'file', :class =>'uploadcsv', multiple: false, accept: '.csv' %>
+		<%= f.submit "Add", :class => 'btn btn-primary', :id => 'uploadsubmit' %>
+		<%= link_to "Back to Dashboard", '/admin/dashboard', :class => 'btn btn-default btn-block' %>
 	<% end %>
 </div>
