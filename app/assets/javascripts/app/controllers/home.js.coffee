@@ -5,7 +5,7 @@
 app.controller "HomeController",
   [ "$scope", "Restangular", "LanguageModel", ($scope, Restangular, LanguageModel) ->
         $scope.languages = LanguageModel.getAll()
-        languageResource = Restangular.one("swarachakra").one("languages")
+        languageResource = Restangular.one("languages")
         languageResource.getList("enabled").then (languages) ->
           LanguageModel.addAll languages
           return

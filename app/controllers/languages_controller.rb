@@ -3,8 +3,10 @@ class LanguagesController < ApplicationController
   end
 
   def all
+  	render json: @alllanguages
   end
 
   def enabled
+  	render json: @enabledlabuages
   end
 end

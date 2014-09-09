@@ -7,7 +7,7 @@
     "$scope", "Restangular", "LanguageModel", function($scope, Restangular, LanguageModel) {
       var languageResource;
       $scope.languages = LanguageModel.getAll();
-      languageResource = Restangular.one("swarachakra").one("languages");
+      languageResource = Restangular.one("languages");
       languageResource.getList("enabled").then(function(languages) {
         LanguageModel.addAll(languages);
       });
