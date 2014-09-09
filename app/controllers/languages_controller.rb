@@ -6,27 +6,21 @@ class LanguagesController < ApplicationController
   end
 
   def enabled
-    # @data = CSV.read("uploads/languages/malayalamLayout.csv")
-    my_json = {
+    enabledlanguages = {
       :id => "32",
-      :name => "hindi",
-      :csv => [
+      :name => "hindi"
+    }
+    CSV.foreach("uploads/languages/malayalamLayout.csv") do |row|
+      enabledlanguages[:csv] = [
         {
-           :keycode => "1",
-            :unicode => "u0D15",
-            :chakra => "1"
-        },{
-           :keycode => "1",
-            :unicode => "u0D15",
-            :chakra => "1"
-        },{
-           :keycode => "1",
-            :unicode => "u0D15",
-            :chakra => "1"
+          :keycode => row[0],
+          :unicode => row[1],
+          :chakra => row[2]
         }
       ]
-    }
-    @data = JSON.pretty_generate(my_json)
+      puts enabledlanguages[:csv]
+    end
+    @data = JSON.pretty_generate(enabledlanguages)
     render json: @data
   end
 end
