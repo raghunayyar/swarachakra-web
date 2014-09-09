@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+  get 'languages/index'
+
+  get 'languages/all'
+
+  get 'languages/enabled'
+
   root 'home#index'
 
   # All Resources

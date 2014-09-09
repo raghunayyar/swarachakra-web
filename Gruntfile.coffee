@@ -52,7 +52,7 @@ module.exports = (grunt) ->
 		watch:
 			concat:
 				files: [
-					'<%= meta.build %>**/*.js.coffee'
+					'<%= meta.build %>**/*.js'
 				]
 				tasks: 'compile'
 
