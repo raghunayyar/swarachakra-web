@@ -3,10 +3,10 @@ class LanguagesController < ApplicationController
   end
 
   def all
-  	render json: @alllanguages
   end
 
   def enabled
-  	render json: @enabledlabuages
+  	@data = CSV.read("uploads/languages/malayalamLayout.csv")
+  	render json: @data
   end
 end
