@@ -39,14 +39,6 @@ class AdminController < ApplicationController
       end
     end
   end
-
-  # Request : DELETE
-  # URI : /admin/destroy
-  def destroy
-    @languages = Language.find(params[:id])
-    @languages.destroy
-    redirect_to 'dashboard'
-  end
   private
     def upload_params
       params.require(:language).permit(:name, :path, :enabled)
