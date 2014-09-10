@@ -23,22 +23,17 @@ class LanguagesController < ApplicationController
   end
 
   def enabled
+    availablelanguages = {
+      :languages => []
+    }
     @language = Language.all.each do |eachlanguage|
       if eachlanguage.enabled
-        enabledlanguages = {
+        availablelanguages[:languages] << {
           :id => eachlanguage.id,
           :name => eachlanguage.languagename,
           :csv => []
         }
-
-        CSV.foreach(eachlanguage.path) do |row|
-          enabledlanguages[:csv] << {
-            :keycode => row[0],
-            :unicode => row[1],
-            :chakra => row[2]
-          }
-        end
-        @data = JSON.pretty_generate(enabledlanguages)
+        @data = JSON.pretty_generate(availablelanguages)
       end
     end
     puts @data
