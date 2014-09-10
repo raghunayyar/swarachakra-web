@@ -5,9 +5,9 @@
 app.controller "AppController",
   [ "$scope", "Restangular", "LanguageModel", ($scope, Restangular, LanguageModel) ->
         $scope.languages = LanguageModel.getAll()
-        languageResource = Restangular.one("languages")
-        languageResource.getList("enabled").then (languages) ->
-          LanguageModel.addAll languages
+        languageResource = Restangular.one("languages").one("enabled")
+        languageResource.get().then (languageobject) ->
+          console.log languageobject.languages
           return
         return
   ]

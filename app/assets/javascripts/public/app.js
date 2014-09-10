@@ -26,9 +26,9 @@
     "$scope", "Restangular", "LanguageModel", function($scope, Restangular, LanguageModel) {
       var languageResource;
       $scope.languages = LanguageModel.getAll();
-      languageResource = Restangular.one("languages");
-      languageResource.getList("enabled").then(function(languages) {
-        LanguageModel.addAll(languages);
+      languageResource = Restangular.one("languages").one("enabled");
+      languageResource.get().then(function(languageobject) {
+        console.log(languageobject.languages);
       });
     }
   ]);

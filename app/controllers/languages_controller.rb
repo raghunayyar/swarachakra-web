@@ -4,22 +4,28 @@ class LanguagesController < ApplicationController
   end
 
   def all
-    alllanguages = {
-      :id => "32",
-      :name => "hindi",
-      :csv => []
+    availablelanguages = {
+      :languages => []
     }
-
-    CSV.foreach("uploads/languages/malayalamLayout.csv") do |row|
-      alllanguages[:csv] << {
-        :keycode => row[0],
-        :unicode => row[1],
-        :chakra => row[2]
+    @language = Language.all.each do |eachlanguage|
+      availablelanguages[:languages] << {
+        :id => eachlanguage.id,
+        :name => eachlanguage.languagename,
+        :csv => []
       }
+      CSV.foreach(eachlanguage.path) do |row|
+        availablelanguages[:languages].each do |single|
+          single[:csv] << {
+            :keycode => row[0],
+            :unicode => row[1],
+            :chakra => row[2]
+          }
+        end
+      end
+      @data = JSON.pretty_generate(availablelanguages)
     end
-    @data = JSON.pretty_generate(alllanguages)
     puts @data
-    render json: @data 
+    render json: @data
   end
 
   def enabled
@@ -33,6 +39,15 @@ class LanguagesController < ApplicationController
           :name => eachlanguage.languagename,
           :csv => []
         }
+        CSV.foreach(eachlanguage.path) do |row|
+          availablelanguages[:languages].each do |single|
+            single[:csv] << {
+              :keycode => row[0],
+              :unicode => row[1],
+              :chakra => row[2]
+            }
+          end
+        end
         @data = JSON.pretty_generate(availablelanguages)
       end
     end
