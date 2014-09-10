@@ -3,7 +3,7 @@
 
   app = angular.module("Swarachakra", ["ngAnimate", "restangular", "ngRoute"]);
 
-  app.controller("HomeController", [
+  app.controller("AppController", [
     "$scope", "Restangular", "LanguageModel", function($scope, Restangular, LanguageModel) {
       var languageResource;
       $scope.languages = LanguageModel.getAll();
@@ -13,6 +13,8 @@
       });
     }
   ]);
+
+  app.controller("TextareController", ["$scope", "Restangular", function($scope, Restangular) {}]);
 
   app.factory("LanguageModel", function() {
     var LanguageModel;

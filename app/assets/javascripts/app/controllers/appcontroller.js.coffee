@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-app.controller "HomeController",
+app.controller "AppController",
   [ "$scope", "Restangular", "LanguageModel", ($scope, Restangular, LanguageModel) ->
         $scope.languages = LanguageModel.getAll()
         languageResource = Restangular.one("languages")
