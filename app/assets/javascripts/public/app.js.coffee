@@ -4,6 +4,29 @@ app = angular.module("Swarachakra", [
   "restangular"
   "ngRoute"
 ])
+# TODO: Add Credits.
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://coffeescript.org/
+
+app.directive "TimeoutChange", [
+  "$timeout"
+  ($timeout) ->
+    return (
+      restrict: "A"
+      link: (scope, element, attributes) ->
+        interval = 300 # 300 miliseconds timeout after typing
+        $(element).bind "input propertychange", ->
+          $timeout.cancel timeout
+          timeout = $timeout(->
+            scope.$apply attributes.TimeoutChange
+            return
+          , interval)
+          return
+
+        return
+    )
+]
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
@@ -21,9 +44,14 @@ app.controller "AppController",
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-app.controller "TextareController",
+app.controller "TextareaController",
   [ "$scope", "Restangular", ($scope, Restangular) ->
-  	return
+      $scope.save = () ->
+        content = $scope.content
+        console.log content
+        SaveModel.add content
+        return
+      return
   ]
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
@@ -45,3 +73,26 @@ app.factory "LanguageModel", ->
       return
 
   new LanguageModel()
+
+# TODO: Credits.
+# Place all the behaviors and hooks related to the matching Service here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://coffeescript.org/
+
+app.factory "SaveModel", [
+  "$q"
+  ($q) ->
+    SaveModel = ->
+      @queue = {}
+      @flushLock = false
+      return
+
+    SaveModel:: =
+      add: (textinput) ->
+        @_queue = textinput
+        console.log 'meh'
+        @flush()
+        return
+
+    return new SaveModel()
+]

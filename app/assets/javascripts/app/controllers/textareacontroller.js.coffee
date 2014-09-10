@@ -2,7 +2,12 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-app.controller "TextareController",
+app.controller "TextareaController",
   [ "$scope", "Restangular", ($scope, Restangular) ->
-  	return
+      $scope.save = () ->
+        content = $scope.content
+        console.log content
+        SaveModel.add content
+        return
+      return
   ]
