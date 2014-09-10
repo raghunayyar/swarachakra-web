@@ -10,7 +10,7 @@
 			<th>CSV Filename</th>
 			<th>Path</th>
 			<th>Enabled</th>
-			<th>Delete</th>
+			<th>Utilities</th>
 		</thead>
 		<tbody>
 			<% @languages.each do |language| %>
@@ -21,9 +21,12 @@
 					<td><%= language.path %></td>
 					<td><%= check_box_tag 'accept', language.enabled, language.enabled %></td>
 					<td>
-					<button class="btn btn-danger btn-xs" class="deletecsv" id="deletecsv">
-						<span class="fa fa-remove"></span>
-					</button>
+						<button class="btn btn-default btn-xs" class="utils" id="editcsv">
+							<span class="fa fa-refresh"></span>
+						</button>
+						<button class="btn btn-danger btn-xs" class="utils" id="deletecsv">
+							<span class="fa fa-remove"></span>
+						</button>
 					</td>
 				</tr>
 			<% end %>
