@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140904100702) do
+ActiveRecord::Schema.define(version: 20140910111822) do
 
   create_table "languages", force: true do |t|
     t.string   "name"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20140904100702) do
     t.boolean  "enabled"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "languagename"
   end
 
 end
