@@ -31,13 +31,11 @@
       languageResource = Restangular.one("languages");
       languageResource.getList('all').then(function(languageobject) {
         LanguageModel.addAll(languageobject);
-        console.log($scope.languages);
       });
       $scope.langauges = LanguageModel.getAll();
       $scope.remove = function(id) {
         var language;
         language = LanguageModel.get(id);
-        console.log(language);
         language.remove().then(function() {
           LanguageModel.remove(id);
           $scope.langauges = LanguageModel.getAll();

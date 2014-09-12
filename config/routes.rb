@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get 'admin/dashboard'
 
   match '/admin/upload', to: 'admin#upload', via: 'post'
+  match 'languages/all/:id', to: 'admin#destroy', via: 'delete'
+  match 'languages/all/:id', to: 'admin#update', via: 'patch'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

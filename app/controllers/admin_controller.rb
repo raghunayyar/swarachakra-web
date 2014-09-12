@@ -18,6 +18,9 @@ class AdminController < ApplicationController
     @languages = Language.find(params[:id])
   end
 
+  def update
+  end
+
   # Request : POST
   # URI : /admin/upload
   def upload
@@ -41,8 +44,6 @@ class AdminController < ApplicationController
   end
 
   def destroy
-    @languages = Language.find(params[:id])
-    puts @languages
   end
 
   private
