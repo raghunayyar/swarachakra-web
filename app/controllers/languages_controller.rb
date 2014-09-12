@@ -24,7 +24,6 @@ class LanguagesController < ApplicationController
       end
       @data = JSON.pretty_generate(availablelanguages)
     end
-    puts @data
     render json: @data
   end
 
@@ -51,7 +50,6 @@ class LanguagesController < ApplicationController
         @data = JSON.pretty_generate(availablelanguages)
       end
     end
-    puts @data
     render json: @data
   end
 end

@@ -39,6 +39,12 @@ class AdminController < ApplicationController
       end
     end
   end
+
+  def destroy
+    @languages = Language.find(params[:id])
+    puts @languages
+  end
+
   private
     def upload_params
       params.require(:language).permit(:name, :path, :enabled)

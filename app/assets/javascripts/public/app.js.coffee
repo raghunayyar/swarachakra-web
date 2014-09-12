@@ -35,10 +35,40 @@ app.controller "AppController",
   [ "$scope", "Restangular", "LanguageModel", ($scope, Restangular, LanguageModel) ->
         $scope.languages = LanguageModel.getAll()
         languageResource = Restangular.one("languages").one("enabled")
+
+        #Loads enabled languages to language model for controller - controller sharing.
         languageResource.get().then (languageobject) ->
-          console.log languageobject.languages
+          LanguageModel.addAll(languageobject.languages)
           return
         return
+  ]
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://coffeescript.org/
+
+app.controller "DashboardController",
+  [ "$scope", "Restangular", "LanguageModel", ($scope, Restangular, LanguageModel) ->
+
+    AdminResource = Restangular.one('admin')
+    $scope.langauges = LanguageModel.getAll()
+    $scope.remove = (id) ->
+      language = LanguageModel.get(id)
+      language.remove().then ->
+        LanguageModel.remove id
+        $scope.langauges = LanguageModel.getAll()
+        return
+      return
+
+    $scope.update = (id) ->
+      $scope.currentload = true
+      currentload = $scope.currentload
+      language = LanguageModel.get(id)
+      language.patch(enabled: currentload).then (languageobject) ->
+        LanguageModel.update languageobject
+        $scope.langauges = LanguageModel.getAll()
+        $scope.currentload = false
+        return
+      return
   ]
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
@@ -61,6 +91,8 @@ app.factory "LanguageModel", ->
   LanguageModel = ->
     @languages = []
     @languageid = {}
+    @deleted = null
+    @updated = null
     return
 
   LanguageModel:: =
@@ -68,8 +100,49 @@ app.factory "LanguageModel", ->
       @languages.push language
       return
 
+    addAll: (languages) ->
+      i = 0
+      while i < languages.length
+        @add languages[i]
+        i++
+      return
+
     getAll: ->
-      @calendars
+      @languages
+      return
+
+    get: (id) ->
+      i = 0
+      console.log @languages
+      while i < @languages.length
+        if id is @languages[i].id
+          @languageid = @languages[i]
+          break
+        i++
+      @languageid
+
+    update: (language) ->
+      i = 0
+
+      while i < @languages.length
+        if @languages[i].id is language.id
+          @languages[i] = language
+          break
+        i++
+      @languageid[language.id] = language
+      @updated = language
+      return
+
+    remove: (id) ->
+      i = 0
+      while i < @languages.length
+        if @languages[i].id is id
+          @languages.splice i, 1
+          delete @languageid[id]
+
+          @deleted = id: id
+          break
+        i++
       return
 
   new LanguageModel()
