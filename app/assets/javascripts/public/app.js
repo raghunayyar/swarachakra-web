@@ -22,25 +22,22 @@
     }
   ]);
 
-  app.controller("AppController", [
-    "$scope", "Restangular", "LanguageModel", function($scope, Restangular, LanguageModel) {
-      var languageResource;
-      $scope.languages = LanguageModel.getAll();
-      languageResource = Restangular.one("languages").one("enabled");
-      languageResource.get().then(function(languageobject) {
-        LanguageModel.addAll(languageobject.languages);
-      });
-    }
-  ]);
+  app.controller("AppController", ["$scope", "Restangular", "LanguageModel", function($scope, Restangular, LanguageModel) {}]);
 
   app.controller("DashboardController", [
     "$scope", "Restangular", "LanguageModel", function($scope, Restangular, LanguageModel) {
-      var AdminResource;
-      AdminResource = Restangular.one('admin');
+      var languageResource;
+      $scope.languages = LanguageModel.getAll();
+      languageResource = Restangular.one("languages");
+      languageResource.getList('all').then(function(languageobject) {
+        LanguageModel.addAll(languageobject);
+        console.log($scope.languages);
+      });
       $scope.langauges = LanguageModel.getAll();
       $scope.remove = function(id) {
         var language;
         language = LanguageModel.get(id);
+        console.log(language);
         language.remove().then(function() {
           LanguageModel.remove(id);
           $scope.langauges = LanguageModel.getAll();
@@ -94,12 +91,11 @@
         }
       },
       getAll: function() {
-        this.languages;
+        return this.languages;
       },
       get: function(id) {
         var i;
         i = 0;
-        console.log(this.languages);
         while (i < this.languages.length) {
           if (id === this.languages[i].id) {
             this.languageid = this.languages[i];

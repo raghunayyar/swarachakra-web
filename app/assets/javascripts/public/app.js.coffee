@@ -33,14 +33,6 @@ app.directive "TimeoutChange", [
 
 app.controller "AppController",
   [ "$scope", "Restangular", "LanguageModel", ($scope, Restangular, LanguageModel) ->
-        $scope.languages = LanguageModel.getAll()
-        languageResource = Restangular.one("languages").one("enabled")
-
-        #Loads enabled languages to language model for controller - controller sharing.
-        languageResource.get().then (languageobject) ->
-          LanguageModel.addAll(languageobject.languages)
-          return
-        return
   ]
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
@@ -49,10 +41,19 @@ app.controller "AppController",
 app.controller "DashboardController",
   [ "$scope", "Restangular", "LanguageModel", ($scope, Restangular, LanguageModel) ->
 
-    AdminResource = Restangular.one('admin')
+    $scope.languages = LanguageModel.getAll()
+    languageResource = Restangular.one("languages")
+
+    #Loads enabled languages to language model for controller - controller sharing.
+    languageResource.getList('all').then (languageobject) ->
+      LanguageModel.addAll(languageobject)
+      console.log $scope.languages
+      return
+    
     $scope.langauges = LanguageModel.getAll()
     $scope.remove = (id) ->
       language = LanguageModel.get(id)
+      console.log language
       language.remove().then ->
         LanguageModel.remove id
         $scope.langauges = LanguageModel.getAll()
@@ -109,11 +110,9 @@ app.factory "LanguageModel", ->
 
     getAll: ->
       @languages
-      return
 
     get: (id) ->
       i = 0
-      console.log @languages
       while i < @languages.length
         if id is @languages[i].id
           @languageid = @languages[i]

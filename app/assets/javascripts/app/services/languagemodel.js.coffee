@@ -24,11 +24,9 @@ app.factory "LanguageModel", ->
 
     getAll: ->
       @languages
-      return
 
     get: (id) ->
       i = 0
-      console.log @languages
       while i < @languages.length
         if id is @languages[i].id
           @languageid = @languages[i]

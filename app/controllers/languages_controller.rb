@@ -5,16 +5,16 @@ class LanguagesController < ApplicationController
 
   def all
     availablelanguages = {
-      :languages => []
+      :data => []
     }
     @language = Language.all.each do |eachlanguage|
-      availablelanguages[:languages] << {
+      availablelanguages[:data] << {
         :id => eachlanguage.id,
         :name => eachlanguage.languagename,
         :csv => []
       }
       CSV.foreach(eachlanguage.path) do |row|
-        availablelanguages[:languages].each do |single|
+        availablelanguages[:data].each do |single|
           single[:csv] << {
             :keycode => row[0],
             :unicode => row[1],
@@ -22,24 +22,24 @@ class LanguagesController < ApplicationController
           }
         end
       end
-      @data = JSON.pretty_generate(availablelanguages)
+      @data = JSON.pretty_generate(availablelanguages[:data])
     end
     render json: @data
   end
 
   def enabled
     availablelanguages = {
-      :languages => []
+      :data => []
     }
     @language = Language.all.each do |eachlanguage|
       if eachlanguage.enabled
-        availablelanguages[:languages] << {
+        availablelanguages[:data] << {
           :id => eachlanguage.id,
           :name => eachlanguage.languagename,
           :csv => []
         }
         CSV.foreach(eachlanguage.path) do |row|
-          availablelanguages[:languages].each do |single|
+          availablelanguages[:data].each do |single|
             single[:csv] << {
               :keycode => row[0],
               :unicode => row[1],
@@ -47,7 +47,7 @@ class LanguagesController < ApplicationController
             }
           end
         end
-        @data = JSON.pretty_generate(availablelanguages)
+        @data = JSON.pretty_generate(availablelanguages[:data])
       end
     end
     render json: @data
