@@ -13,9 +13,35 @@ app.factory "SaveModel", [
 
     SaveModel:: =
       add: (textinput) ->
-        @_queue = textinput
-        console.log 'meh'
+        @queue[0] = textinput
         @flush()
+        return
+
+      flush: ->
+        keys = Object.keys(@queue)
+        if keys.length is 0 or @flushLock
+          return
+        else
+          @flushLock = true
+        self = this
+        requests = []
+        i = 0
+
+        while i < keys.length
+          textinput = @queue[keys[i]]
+          requests.push textinput.put().then(@noteUpdateRequest.bind(null, textinput))
+          i++
+        @queue = {}
+
+        $q.all(requests).then ->
+          self.flushLock = false
+          self.flush()
+          return
+
+        return
+
+      noteUpdateRequest: (note, response) ->
+        note = response
         return
 
     return new SaveModel()

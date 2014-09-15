@@ -3,18 +3,18 @@
 
   app = angular.module("Swarachakra", ["ngAnimate", "restangular", "ngRoute"]);
 
-  app.directive("TimeoutChange", [
+  app.directive("swarachakraTimeoutChange", [
     "$timeout", function($timeout) {
       return {
         restrict: "A",
         link: function(scope, element, attributes) {
           var interval;
-          interval = 300;
+          interval = 3000;
           $(element).bind("input propertychange", function() {
             var timeout;
             $timeout.cancel(timeout);
             timeout = $timeout(function() {
-              scope.$apply(attributes.TimeoutChange);
+              scope.$apply(attributes.swarachakraTimeoutChange);
             }, interval);
           });
         }
@@ -60,8 +60,15 @@
     }
   ]);
 
-  app.controller("TextareaController", [
+  app.controller("KeyboardController", [
     "$scope", "Restangular", "LanguageModel", function($scope, Restangular, LanguageModel) {
+      $scope.languages = LanguageModel.getAll();
+      console.log($scope.languages);
+    }
+  ]);
+
+  app.controller("TextareaController", [
+    "$scope", "Restangular", "LanguageModel", "SaveModel", function($scope, Restangular, LanguageModel, SaveModel) {
       $scope.languages = LanguageModel.getAll();
       $scope.save = function() {
         var content;
@@ -148,9 +155,33 @@
       };
       SaveModel.prototype = {
         add: function(textinput) {
-          this._queue = textinput;
-          console.log('meh');
+          this.queue[0] = textinput;
           this.flush();
+        },
+        flush: function() {
+          var i, keys, requests, self, textinput;
+          keys = Object.keys(this.queue);
+          if (keys.length === 0 || this.flushLock) {
+            return;
+          } else {
+            this.flushLock = true;
+          }
+          self = this;
+          requests = [];
+          i = 0;
+          while (i < keys.length) {
+            textinput = this.queue[keys[i]];
+            requests.push(textinput.put().then(this.noteUpdateRequest.bind(null, textinput)));
+            i++;
+          }
+          this.queue = {};
+          $q.all(requests).then(function() {
+            self.flushLock = false;
+            self.flush();
+          });
+        },
+        noteUpdateRequest: function(note, response) {
+          note = response;
         }
       };
       return new SaveModel();

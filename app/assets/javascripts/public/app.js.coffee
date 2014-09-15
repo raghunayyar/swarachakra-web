@@ -4,22 +4,22 @@ app = angular.module("Swarachakra", [
   "restangular"
   "ngRoute"
 ])
-# TODO: Add Credits.
+# Credits - Bernhard Posselt
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-app.directive "TimeoutChange", [
+app.directive "swarachakraTimeoutChange", [
   "$timeout"
   ($timeout) ->
     return (
       restrict: "A"
       link: (scope, element, attributes) ->
-        interval = 300 # 300 miliseconds timeout after typing
+        interval = 3000
         $(element).bind "input propertychange", ->
           $timeout.cancel timeout
           timeout = $timeout(->
-            scope.$apply attributes.TimeoutChange
+            scope.$apply attributes.swarachakraTimeoutChange
             return
           , interval)
           return
@@ -75,8 +75,19 @@ app.controller "DashboardController",
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-app.controller "TextareaController",
+app.controller "KeyboardController",
   [ "$scope", "Restangular", "LanguageModel", ($scope, Restangular, LanguageModel) ->
+
+      $scope.languages = LanguageModel.getAll()
+      console.log $scope.languages
+      return
+  ]
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://coffeescript.org/
+
+app.controller "TextareaController",
+  [ "$scope", "Restangular", "LanguageModel", "SaveModel", ($scope, Restangular, LanguageModel, SaveModel) ->
 
       $scope.languages = LanguageModel.getAll()
 
@@ -164,9 +175,35 @@ app.factory "SaveModel", [
 
     SaveModel:: =
       add: (textinput) ->
-        @_queue = textinput
-        console.log 'meh'
+        @queue[0] = textinput
         @flush()
+        return
+
+      flush: ->
+        keys = Object.keys(@queue)
+        if keys.length is 0 or @flushLock
+          return
+        else
+          @flushLock = true
+        self = this
+        requests = []
+        i = 0
+
+        while i < keys.length
+          textinput = @queue[keys[i]]
+          requests.push textinput.put().then(@noteUpdateRequest.bind(null, textinput))
+          i++
+        @queue = {}
+
+        $q.all(requests).then ->
+          self.flushLock = false
+          self.flush()
+          return
+
+        return
+
+      noteUpdateRequest: (note, response) ->
+        note = response
         return
 
     return new SaveModel()
