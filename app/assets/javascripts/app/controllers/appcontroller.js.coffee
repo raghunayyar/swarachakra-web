@@ -4,4 +4,13 @@
 
 app.controller "AppController",
   [ "$scope", "Restangular", "LanguageModel", ($scope, Restangular, LanguageModel) ->
+    
+    $scope.languages = LanguageModel.getAll()
+    languageResource = Restangular.one("languages")
+
+    #Loads enabled languages to language model for controller - controller sharing.
+    languageResource.getList('all').then (languageobject) ->
+      LanguageModel.addAll(languageobject)
+      return
+     return
   ]

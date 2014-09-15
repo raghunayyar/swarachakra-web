@@ -3,7 +3,10 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 app.controller "TextareaController",
-  [ "$scope", "Restangular", ($scope, Restangular) ->
+  [ "$scope", "Restangular", "LanguageModel", ($scope, Restangular, LanguageModel) ->
+
+      $scope.languages = LanguageModel.getAll()
+
       $scope.save = () ->
         content = $scope.content
         console.log content

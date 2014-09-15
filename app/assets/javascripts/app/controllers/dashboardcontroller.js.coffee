@@ -5,15 +5,8 @@
 app.controller "DashboardController",
   [ "$scope", "Restangular", "LanguageModel", ($scope, Restangular, LanguageModel) ->
 
-    $scope.languages = LanguageModel.getAll()
-    languageResource = Restangular.one("languages")
-
-    #Loads enabled languages to language model for controller - controller sharing.
-    languageResource.getList('all').then (languageobject) ->
-      LanguageModel.addAll(languageobject)
-      return
-
     $scope.langauges = LanguageModel.getAll()
+
     $scope.remove = (id) ->
       language = LanguageModel.get(id)
       language.remove().then ->

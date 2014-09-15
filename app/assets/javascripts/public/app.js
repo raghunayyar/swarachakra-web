@@ -22,9 +22,7 @@
     }
   ]);
 
-  app.controller("AppController", ["$scope", "Restangular", "LanguageModel", function($scope, Restangular, LanguageModel) {}]);
-
-  app.controller("DashboardController", [
+  app.controller("AppController", [
     "$scope", "Restangular", "LanguageModel", function($scope, Restangular, LanguageModel) {
       var languageResource;
       $scope.languages = LanguageModel.getAll();
@@ -32,6 +30,11 @@
       languageResource.getList('all').then(function(languageobject) {
         LanguageModel.addAll(languageobject);
       });
+    }
+  ]);
+
+  app.controller("DashboardController", [
+    "$scope", "Restangular", "LanguageModel", function($scope, Restangular, LanguageModel) {
       $scope.langauges = LanguageModel.getAll();
       $scope.remove = function(id) {
         var language;
@@ -58,7 +61,8 @@
   ]);
 
   app.controller("TextareaController", [
-    "$scope", "Restangular", function($scope, Restangular) {
+    "$scope", "Restangular", "LanguageModel", function($scope, Restangular, LanguageModel) {
+      $scope.languages = LanguageModel.getAll();
       $scope.save = function() {
         var content;
         content = $scope.content;
