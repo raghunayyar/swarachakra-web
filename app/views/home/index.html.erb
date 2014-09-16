@@ -1,8 +1,13 @@
 <div ng-controller="TextareaController" id="textarea">
-<h1>The Textfield: implemented.</h1>
-  <textarea swarachakra-timeout-change="save()" ng-model="content" autofocus tabindex="-1">
-  </textarea>
+  <!--<textarea swarachakra-timeout-change="save()" ng-model="content" autofocus tabindex="-1">
+  </textarea>-->
 </div>
 <div ng-controller="KeyboardController" id="keyboard">
-  <h1>Keyboard goes here.</h1>
+  <table>
+  	<tbody>
+  		<tr ng-repeat="language in langauges.csv">
+  			<td>{{ langauge }}</td>
+  		</tr>
+  	</tbody>
+  </table>
 </div>

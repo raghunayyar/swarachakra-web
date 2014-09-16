@@ -9,8 +9,8 @@ app.controller "AppController",
     languageResource = Restangular.one("languages")
 
     #Loads enabled languages to language model for controller - controller sharing.
-    languageResource.getList('all').then (languageobject) ->
-      LanguageModel.addAll(languageobject)
-      return
-     return
+    #languageResource.getList('all').then (languageobject) ->
+    #LanguageModel.addAll(languageobject)
+    #return
+    return
   ]

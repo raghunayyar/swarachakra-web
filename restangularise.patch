@@ -1,0 +1,362 @@
+commit 78eaa130acc5ff7aeb78a99b58c346549e21cf9f
+Author: raghunayyar <me@iraghu.com>
+Date:   Sat Sep 13 01:24:09 2014 +0530
+
+    Enhancement: Restangularise everything.
+
+diff --git a/app/assets/javascripts/app/controllers/appcontroller.js.coffee b/app/assets/javascripts/app/controllers/appcontroller.js.coffee
+index d8fbaf4..ed28499 100644
+--- a/app/assets/javascripts/app/controllers/appcontroller.js.coffee
++++ b/app/assets/javascripts/app/controllers/appcontroller.js.coffee
+@@ -4,12 +4,4 @@
+ 
+ app.controller "AppController",
+   [ "$scope", "Restangular", "LanguageModel", ($scope, Restangular, LanguageModel) ->
+-        $scope.languages = LanguageModel.getAll()
+-        languageResource = Restangular.one("languages").one("enabled")
+-
+-        #Loads enabled languages to language model for controller - controller sharing.
+-        languageResource.get().then (languageobject) ->
+-          LanguageModel.addAll(languageobject.languages)
+-          return
+-        return
+   ]
+\ No newline at end of file
+diff --git a/app/assets/javascripts/app/controllers/dashboardcontroller.js.coffee b/app/assets/javascripts/app/controllers/dashboardcontroller.js.coffee
+index 5d5f57a..81803de 100644
+--- a/app/assets/javascripts/app/controllers/dashboardcontroller.js.coffee
++++ b/app/assets/javascripts/app/controllers/dashboardcontroller.js.coffee
+@@ -6,7 +6,14 @@ app.controller "DashboardController",
+   [ "$scope", "Restangular", "LanguageModel", ($scope, Restangular, LanguageModel) ->
+ 
+     AdminResource = Restangular.one('admin')
+-    $scope.langauges = LanguageModel.getAll()
++    $scope.languages = LanguageModel.getAll()
++    languageResource = Restangular.one("languages").one("all")
++
++    #Loads enabled languages to language model for controller - controller sharing.
++    languageResource.get().then (languageobject) ->
++      LanguageModel.addAll(languageobject)
++      return
++    return
+     $scope.remove = (id) ->
+       language = LanguageModel.get(id)
+       language.remove().then ->
+diff --git a/app/assets/javascripts/app/services/languagemodel.js.coffee b/app/assets/javascripts/app/services/languagemodel.js.coffee
+index 1f3787f..54e908e 100644
+--- a/app/assets/javascripts/app/services/languagemodel.js.coffee
++++ b/app/assets/javascripts/app/services/languagemodel.js.coffee
+@@ -17,9 +17,10 @@ app.factory "LanguageModel", ->
+ 
+     addAll: (languages) ->
+       i = 0
+-      while i < languages.length
+-        @add languages[i]
++      while i < languages.data.length
++        @add languages.data[i]
+         i++
++      console.log @languages
+       return
+ 
+     getAll: ->
+@@ -28,10 +29,9 @@ app.factory "LanguageModel", ->
+ 
+     get: (id) ->
+       i = 0
+-      console.log @languages
+-      while i < @languages.length
+-        if id is @languages[i].id
+-          @languageid = @languages[i]
++      while i < @languages.data.length
++        if id is @languages.data[i].id
++          @languageid = @languages.data[i]
+           break
+         i++
+       @languageid
+@@ -39,9 +39,9 @@ app.factory "LanguageModel", ->
+     update: (language) ->
+       i = 0
+ 
+-      while i < @languages.length
+-        if @languages[i].id is language.id
+-          @languages[i] = language
++      while i < @languages.data.length
++        if @languages.data[i].id is language.id
++          @languages.data[i] = language
+           break
+         i++
+       @languageid[language.id] = language
+@@ -50,9 +50,9 @@ app.factory "LanguageModel", ->
+ 
+     remove: (id) ->
+       i = 0
+-      while i < @languages.length
+-        if @languages[i].id is id
+-          @languages.splice i, 1
++      while i < @languages.data.length
++        if @languages.data[i].id is id
++          @languages.data.splice i, 1
+           delete @languageid[id]
+ 
+           @deleted = id: id
+diff --git a/app/assets/javascripts/public/app.js b/app/assets/javascripts/public/app.js
+index 75ee163..30809a2 100644
+--- a/app/assets/javascripts/public/app.js
++++ b/app/assets/javascripts/public/app.js
+@@ -22,22 +22,18 @@
+     }
+   ]);
+ 
+-  app.controller("AppController", [
+-    "$scope", "Restangular", "LanguageModel", function($scope, Restangular, LanguageModel) {
+-      var languageResource;
+-      $scope.languages = LanguageModel.getAll();
+-      languageResource = Restangular.one("languages").one("enabled");
+-      languageResource.get().then(function(languageobject) {
+-        LanguageModel.addAll(languageobject.languages);
+-      });
+-    }
+-  ]);
++  app.controller("AppController", ["$scope", "Restangular", "LanguageModel", function($scope, Restangular, LanguageModel) {}]);
+ 
+   app.controller("DashboardController", [
+     "$scope", "Restangular", "LanguageModel", function($scope, Restangular, LanguageModel) {
+-      var AdminResource;
++      var AdminResource, languageResource;
+       AdminResource = Restangular.one('admin');
+-      $scope.langauges = LanguageModel.getAll();
++      $scope.languages = LanguageModel.getAll();
++      languageResource = Restangular.one("languages").one("all");
++      languageResource.get().then(function(languageobject) {
++        LanguageModel.addAll(languageobject);
++      });
++      return;
+       $scope.remove = function(id) {
+         var language;
+         language = LanguageModel.get(id);
+@@ -88,10 +84,11 @@
+       addAll: function(languages) {
+         var i;
+         i = 0;
+-        while (i < languages.length) {
+-          this.add(languages[i]);
++        while (i < languages.data.length) {
++          this.add(languages.data[i]);
+           i++;
+         }
++        console.log(this.languages);
+       },
+       getAll: function() {
+         this.languages;
+@@ -99,10 +96,9 @@
+       get: function(id) {
+         var i;
+         i = 0;
+-        console.log(this.languages);
+-        while (i < this.languages.length) {
+-          if (id === this.languages[i].id) {
+-            this.languageid = this.languages[i];
++        while (i < this.languages.data.length) {
++          if (id === this.languages.data[i].id) {
++            this.languageid = this.languages.data[i];
+             break;
+           }
+           i++;
+@@ -112,9 +108,9 @@
+       update: function(language) {
+         var i;
+         i = 0;
+-        while (i < this.languages.length) {
+-          if (this.languages[i].id === language.id) {
+-            this.languages[i] = language;
++        while (i < this.languages.data.length) {
++          if (this.languages.data[i].id === language.id) {
++            this.languages.data[i] = language;
+             break;
+           }
+           i++;
+@@ -125,9 +121,9 @@
+       remove: function(id) {
+         var i;
+         i = 0;
+-        while (i < this.languages.length) {
+-          if (this.languages[i].id === id) {
+-            this.languages.splice(i, 1);
++        while (i < this.languages.data.length) {
++          if (this.languages.data[i].id === id) {
++            this.languages.data.splice(i, 1);
+             delete this.languageid[id];
+             this.deleted = {
+               id: id
+diff --git a/app/assets/javascripts/public/app.js.coffee b/app/assets/javascripts/public/app.js.coffee
+index 7e51a91..b7a30ca 100644
+--- a/app/assets/javascripts/public/app.js.coffee
++++ b/app/assets/javascripts/public/app.js.coffee
+@@ -33,14 +33,6 @@ app.directive "TimeoutChange", [
+ 
+ app.controller "AppController",
+   [ "$scope", "Restangular", "LanguageModel", ($scope, Restangular, LanguageModel) ->
+-        $scope.languages = LanguageModel.getAll()
+-        languageResource = Restangular.one("languages").one("enabled")
+-
+-        #Loads enabled languages to language model for controller - controller sharing.
+-        languageResource.get().then (languageobject) ->
+-          LanguageModel.addAll(languageobject.languages)
+-          return
+-        return
+   ]
+ # Place all the behaviors and hooks related to the matching controller here.
+ # All this logic will automatically be available in application.js.
+@@ -50,7 +42,14 @@ app.controller "DashboardController",
+   [ "$scope", "Restangular", "LanguageModel", ($scope, Restangular, LanguageModel) ->
+ 
+     AdminResource = Restangular.one('admin')
+-    $scope.langauges = LanguageModel.getAll()
++    $scope.languages = LanguageModel.getAll()
++    languageResource = Restangular.one("languages").one("all")
++
++    #Loads enabled languages to language model for controller - controller sharing.
++    languageResource.get().then (languageobject) ->
++      LanguageModel.addAll(languageobject)
++      return
++    return
+     $scope.remove = (id) ->
+       language = LanguageModel.get(id)
+       language.remove().then ->
+@@ -102,9 +101,10 @@ app.factory "LanguageModel", ->
+ 
+     addAll: (languages) ->
+       i = 0
+-      while i < languages.length
+-        @add languages[i]
++      while i < languages.data.length
++        @add languages.data[i]
+         i++
++      console.log @languages
+       return
+ 
+     getAll: ->
+@@ -113,10 +113,9 @@ app.factory "LanguageModel", ->
+ 
+     get: (id) ->
+       i = 0
+-      console.log @languages
+-      while i < @languages.length
+-        if id is @languages[i].id
+-          @languageid = @languages[i]
++      while i < @languages.data.length
++        if id is @languages.data[i].id
++          @languageid = @languages.data[i]
+           break
+         i++
+       @languageid
+@@ -124,9 +123,9 @@ app.factory "LanguageModel", ->
+     update: (language) ->
+       i = 0
+ 
+-      while i < @languages.length
+-        if @languages[i].id is language.id
+-          @languages[i] = language
++      while i < @languages.data.length
++        if @languages.data[i].id is language.id
++          @languages.data[i] = language
+           break
+         i++
+       @languageid[language.id] = language
+@@ -135,9 +134,9 @@ app.factory "LanguageModel", ->
+ 
+     remove: (id) ->
+       i = 0
+-      while i < @languages.length
+-        if @languages[i].id is id
+-          @languages.splice i, 1
++      while i < @languages.data.length
++        if @languages.data[i].id is id
++          @languages.data.splice i, 1
+           delete @languageid[id]
+ 
+           @deleted = id: id
+diff --git a/app/controllers/languages_controller.rb b/app/controllers/languages_controller.rb
+index 4ce8346..cd2bf5f 100644
+--- a/app/controllers/languages_controller.rb
++++ b/app/controllers/languages_controller.rb
+@@ -5,16 +5,16 @@ class LanguagesController < ApplicationController
+ 
+   def all
+     availablelanguages = {
+-      :languages => []
++      :data => []
+     }
+     @language = Language.all.each do |eachlanguage|
+-      availablelanguages[:languages] << {
++      availablelanguages[:data] << {
+         :id => eachlanguage.id,
+         :name => eachlanguage.languagename,
+         :csv => []
+       }
+       CSV.foreach(eachlanguage.path) do |row|
+-        availablelanguages[:languages].each do |single|
++        availablelanguages[:data].each do |single|
+           single[:csv] << {
+             :keycode => row[0],
+             :unicode => row[1],
+@@ -29,17 +29,17 @@ class LanguagesController < ApplicationController
+ 
+   def enabled
+     availablelanguages = {
+-      :languages => []
++      :data => []
+     }
+     @language = Language.all.each do |eachlanguage|
+       if eachlanguage.enabled
+-        availablelanguages[:languages] << {
++        availablelanguages[:data] << {
+           :id => eachlanguage.id,
+           :name => eachlanguage.languagename,
+           :csv => []
+         }
+         CSV.foreach(eachlanguage.path) do |row|
+-          availablelanguages[:languages].each do |single|
++          availablelanguages[:data].each do |single|
+             single[:csv] << {
+               :keycode => row[0],
+               :unicode => row[1],
+diff --git a/app/views/admin/dashboard.html.erb b/app/views/admin/dashboard.html.erb
+index 4bd2821..6573b73 100644
+--- a/app/views/admin/dashboard.html.erb
++++ b/app/views/admin/dashboard.html.erb
+@@ -7,29 +7,21 @@
+ 		<thead>
+ 			<th>Sr No.</th>
+ 			<th>Language</th>
+-			<th>CSV Filename</th>
+-			<th>Path</th>
+-			<th>Enabled</th>
+ 			<th>Utilities</th>
+ 		</thead>
+ 		<tbody>
+-			<% @languages.each do |language| %>
+-				<tr>
+-					<td><%= language.id %></td>
+-					<td><%= language.languagename%></td>
+-					<td><%= language.name %></td>
+-					<td><%= language.path %></td>
+-					<td><%= check_box_tag 'accept', language.enabled, language.enabled %></td>
++				<tr ng-repeat="language in languages">
++					<td>{{ language.id }}</td>
++					<td>{{ language.name }}</td>
+ 					<td>
+-						<button ng-click='update(<%= language.id %>)' class="btn btn-default btn-xs">
++						<button ng-click='update(language.id)' class="btn btn-default btn-xs">
+ 							<span class="fa fa-refresh"></span>
+ 						</button>
+-						<button ng-click='remove(<%= language.id %>)' class="btn btn-danger btn-xs">
++						<button ng-click='remove(language.id)' class="btn btn-danger btn-xs">
+ 							<span class="fa fa-refresh"></span>
+ 						</button>
+ 					</td>
+ 				</tr>
+-			<% end %>
+ 		</tbody>
+ 	</table>
+ 	<%= link_to "Upload New File", '/admin/new', :class => 'btn btn-success' %>

@@ -27,9 +27,6 @@
       var languageResource;
       $scope.languages = LanguageModel.getAll();
       languageResource = Restangular.one("languages");
-      languageResource.getList('all').then(function(languageobject) {
-        LanguageModel.addAll(languageobject);
-      });
     }
   ]);
 
@@ -62,8 +59,13 @@
 
   app.controller("KeyboardController", [
     "$scope", "Restangular", "LanguageModel", function($scope, Restangular, LanguageModel) {
+      var languageResource;
       $scope.languages = LanguageModel.getAll();
-      console.log($scope.languages);
+      languageResource = Restangular.one("languages");
+      languageResource.getList('all').then(function(languageobject) {
+        LanguageModel.addAll(languageobject);
+        console.log($scope.languages);
+      });
     }
   ]);
 
@@ -73,7 +75,6 @@
       $scope.save = function() {
         var content;
         content = $scope.content;
-        console.log(content);
         SaveModel.add(content);
       };
     }

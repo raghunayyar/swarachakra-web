@@ -38,10 +38,10 @@ app.controller "AppController",
     languageResource = Restangular.one("languages")
 
     #Loads enabled languages to language model for controller - controller sharing.
-    languageResource.getList('all').then (languageobject) ->
-      LanguageModel.addAll(languageobject)
-      return
-     return
+    #languageResource.getList('all').then (languageobject) ->
+    #LanguageModel.addAll(languageobject)
+    #return
+    return
   ]
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
@@ -79,7 +79,11 @@ app.controller "KeyboardController",
   [ "$scope", "Restangular", "LanguageModel", ($scope, Restangular, LanguageModel) ->
 
       $scope.languages = LanguageModel.getAll()
-      console.log $scope.languages
+      languageResource = Restangular.one("languages")
+      languageResource.getList('all').then (languageobject) ->
+        LanguageModel.addAll(languageobject)
+        console.log $scope.languages
+        return
       return
   ]
 # Place all the behaviors and hooks related to the matching controller here.
@@ -93,7 +97,6 @@ app.controller "TextareaController",
 
       $scope.save = () ->
         content = $scope.content
-        console.log content
         SaveModel.add content
         return
       return

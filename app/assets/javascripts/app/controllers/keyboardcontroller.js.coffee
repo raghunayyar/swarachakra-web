@@ -6,6 +6,10 @@ app.controller "KeyboardController",
   [ "$scope", "Restangular", "LanguageModel", ($scope, Restangular, LanguageModel) ->
 
       $scope.languages = LanguageModel.getAll()
-      console.log $scope.languages
+      languageResource = Restangular.one("languages")
+      languageResource.getList('all').then (languageobject) ->
+        LanguageModel.addAll(languageobject)
+        console.log $scope.languages
+        return
       return
   ]
