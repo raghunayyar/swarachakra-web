@@ -3,4 +3,101 @@
   </textarea>-->
 </div>
 <div ng-controller="KeyboardController" id="keyboard">
+<!-- The Keyboard Container -->
+  <div id="keyboardcontainer">
+    <div class="header">
+      <strong class="languagename">Language: <span>Hindi</span></strong>
+      <div class="toggler">
+        <i class="fa fa-arrow-up"></i>
+      </div>
+    </div>
+    <!--<div class="options">
+      <strong>Available Languages</strong>
+      <ul>
+        <li>
+          <input type="radio" name="languagetype" value="male">
+          <label for="languagetype">Hindi</label>
+        </li>
+        <li>
+          <input type="radio" name="languagetype" value="male">
+          <label for="languagetype">Telagu</label>
+        </li>
+        <li>
+          <input type="radio" name="languagetype" value="male">
+          <label for="languagetype">Malayalam</label>
+        </li>
+      </ul>
+      <button class="btn-primary btn languageswitch" ng-click="switch(language.id)">
+        <i class="fa fa-refresh"></i><span>Refresh</span>
+      </button>
+    </div>
+    -->
+    <!-- First Column should be here. 1x5-->
+    <!--<div class="firstcolumn">
+      <table>
+        <thead></thead>
+        <tbody></tbody>
+      </table>
+    </div>-->
+    <!-- First 5x5 table for the Swarachakra keys. 5x5-->
+    <div class="maintable1">
+      <table>
+        <thead></thead>
+        <tbody>
+          <tr ng-repeat="data in onscreen | limitTo: 5">
+            <td ng-repeat="row in data " data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}">
+              <span>{{ row.keycode }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Second 5x5 table for the Swarachakra keys. 5x5-->
+    <div class="maintable2">
+      <table>
+        <thead></thead>
+        <tbody>
+          <tr>
+            <td ng-repeat="row in onscreen[5]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-click="share(row.unicode)">
+              <span>{{ row.keycode }}</span>
+            </td>
+          </tr>
+          <tr>
+            <td ng-repeat="row in onscreen[6]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}">
+              <span>{{ row.keycode }}</span>
+            </td>
+          </tr>
+          <tr>
+            <td ng-repeat="row in onscreen[7]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}">
+              <span>{{ row.keycode }}</span>
+            </td>
+          </tr>
+          <tr>
+            <td ng-repeat="row in onscreen[8]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}">
+              <span>{{ row.keycode }}</span>
+            </td>
+          </tr>
+          <tr>
+            <td ng-repeat="row in onscreen[9]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}">
+              <span>{{ row.keycode }}</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Last Column should be here. 1x5 -->
+    <div class="lastcolumn">
+      <table>
+        <thead></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <!-- Last row should be here.5x1 -->
+    <div class="lastrow">
+      <table>
+        <thead></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
 </div>
