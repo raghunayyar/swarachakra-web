@@ -38,8 +38,6 @@
 	bottom:0px;
 	left:100px;
 	right:100px;
-	width:60%;
-	height:50%;
 	margin:0 auto;
 	overflow:hidden;
 	.header {
@@ -94,6 +92,8 @@
 			tbody {
 				tr {
 					td {
+						width:46px !important;
+						height:50px !important;
 						background:#eee;
 						padding:15px;
 						text-align: center;
@@ -111,7 +111,7 @@
 		float: left;
 		margin-left: 2px;
 		#spacebar {
-			width:240px;
+			width:232px !important;
 		}
 	}
 	table {
