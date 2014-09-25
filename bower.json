@@ -6,7 +6,9 @@
     "restangular": "",
     "angular-mocks": "",
     "angular-route": "",
-    "angular-animate": ""
+    "angular-animate": "",
+    "angular-sanitize": "",
+    "angular-touch": ""
   },
   "devDependencies": {
 	"angular-mocks": ""
