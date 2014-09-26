@@ -41,7 +41,7 @@
           <thead></thead>
           <tbody>
             <tr ng-repeat="data in onscreen | limitTo: 5">
-              <td ng-repeat="row in data " data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}">
+              <td ng-repeat="row in data" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}">
                 <span>{{ row.unicode }}</span>
               </td>
             </tr>

@@ -31,8 +31,8 @@
 }
 
 #keyboardcontainer {
-	max-width:558px;
-	min-width:558px;
+	max-width:564px;
+	min-width:564px;
 	max-height:600px;
 	position:absolute;
 	bottom:0px;
@@ -77,12 +77,16 @@
 		margin-left:2px;
 	}
 	.lastcolumn, .firstcolumn {
-		width:47px;
+		width:48px;
 	}
 	.maintable1, .maintable2 {
-		width:230px;
+		width:232px;
 	}
 	.maintable1, .maintable2, .lastcolumn, .firstcolumn {
+		margin-left:1px;
+		table {
+			border-right:1px solid #111;
+		}
 	}
 	.maintable1, .maintable2, .lastcolumn, .firstcolumn, .lastrow {
 		float:left;
@@ -94,13 +98,18 @@
 					td {
 						width:46px !important;
 						height:50px !important;
-						background:#eee;
 						padding:15px;
 						text-align: center;
 						&:hover {
-							background: #ddd;
+							background: #ccc;
 							cursor:pointer;
 						}
+					}
+					&:nth-child(2n+1) {
+						background:#ddd;
+					}
+					&:nth-child(2n) {
+						background:#eee;
 					}
 				}
 			}
@@ -109,9 +118,10 @@
 	.lastrow {
 		margin-top: -5px;
 		float: left;
-		margin-left: 2px;
+		margin-left: 1px;
+		border-right:1px solid #111;
 		#spacebar {
-			width:232px !important;
+			width:240px !important;
 		}
 	}
 	table {
