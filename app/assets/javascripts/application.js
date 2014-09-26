@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require angular/angular
 //= require angular-animate/angular-animate
+//= require angular-sanitize/angular-sanitize
+//= require angular-touch/angular-touch
 //= require angular-route/angular-route
 //= require lodash/dist/lodash
 //= require restangular/dist/restangular
