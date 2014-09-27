@@ -63,7 +63,7 @@
       languageResource = void 0;
       $scope.languages = LanguageModel.getAll();
       languageResource = Restangular.one("languages");
-      return languageResource.getList("all").then(function(languageobject) {
+      languageResource.getList("all").then(function(languageobject) {
         LanguageModel.addAll(languageobject);
         console.log($scope.languages);
         $scope.onscreen = [
@@ -372,6 +372,9 @@
         $scope.blah = "\u0D1C";
         console.log($scope.blah);
       });
+      $scope.yolo = function(id) {
+        $scope.showchakra = !$scope.showchakra;
+      };
     }
   ]);
 

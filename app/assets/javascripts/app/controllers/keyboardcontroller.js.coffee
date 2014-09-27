@@ -386,5 +386,9 @@ app.controller "KeyboardController", [
       $scope.blah = "\u0D1C"
       console.log $scope.blah
       return
+    $scope.yolo = (id) ->
+      $scope.showchakra = !$scope.showchakra
+      return
+    return
 
 ]

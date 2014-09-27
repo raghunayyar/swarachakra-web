@@ -1,8 +1,8 @@
 <div ng-controller="TextareaController" id="textarea">
-  <textarea swarachakra-timeout-change="save()" ng-model="content" autofocus tabindex="-1">
+  <!--<textarea swarachakra-timeout-change="save()" ng-model="content" autofocus tabindex="-1">
   </textarea>
-</div>
-<div ng-controller="KeyboardController" id="keyboard">
+</div>-->
+<div ng-controller="KeyboardController" id="keyboard" ng-init="showchakra = false">
 <!-- The Keyboard Container -->
   <div id="keyboardcontainer">
     <div class="header">
@@ -29,9 +29,6 @@
             <tr>
               <td><span>dd</span></td>
             </tr>
-            <tr>
-              <td><span>dd</span></td>
-            </tr>
           </tbody>
         </table>
       </div>
@@ -40,8 +37,8 @@
         <table>
           <thead></thead>
           <tbody>
-            <tr ng-repeat="data in onscreen | limitTo: 5">
-              <td ng-repeat="row in data" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}">
+            <tr ng-repeat="data in onscreen | limitTo: 4">
+              <td ng-repeat="row in data" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode)" ng-mouseup="yolo(row.keycode)">
                 <span>{{ row.unicode }}</span>
               </td>
             </tr>
@@ -54,7 +51,12 @@
           <thead></thead>
           <tbody>
             <tr>
-              <td ng-repeat="row in onscreen[5]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-click="share(row.unicode)">
+              <td ng-repeat="row in onscreen[4]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-click="share(row.unicode)">
+                <span>{{ row.unicode }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td ng-repeat="row in onscreen[5]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}">
                 <span>{{ row.unicode }}</span>
               </td>
             </tr>
@@ -68,16 +70,6 @@
                 <span>{{ row.unicode }}</span>
               </td>
             </tr>
-            <tr>
-              <td ng-repeat="row in onscreen[8]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}">
-                <span>{{ row.unicode }}</span>
-              </td>
-            </tr>
-            <tr>
-              <td ng-repeat="row in onscreen[9]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}">
-                <span>{{ row.unicode }}</span>
-              </td>
-            </tr>
           </tbody>
         </table>
       </div>
@@ -86,9 +78,6 @@
         <table>
           <thead></thead>
           <tbody>
-            <tr>
-              <td><span>dd</span></td>
-            </tr>
             <tr>
               <td><span>dd</span></td>
             </tr>
@@ -146,5 +135,15 @@
       </button>
     </div>
     -->
+  </div>
+  <div id="chakra" ng-show="showchakra">
+    <ul>
+      <li><span>a</span></li>
+      <li><span>b</span></li>
+      <li><span>c</span></li>
+      <li><span>d</span></li>
+      <li><span>e</span></li>
+      <li><span>f</span></li>
+    </ul>
   </div>
 </div>
