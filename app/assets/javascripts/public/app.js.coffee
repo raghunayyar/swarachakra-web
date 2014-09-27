@@ -461,8 +461,9 @@ app.controller "KeyboardController", [
       $scope.blah = "\u0D1C"
       console.log $scope.blah
       return
-    $scope.yolo = (id) ->
+    $scope.yolo = (keycode,unicode) ->
       $scope.showchakra = !$scope.showchakra
+      $scope.currentkey = unicode
       return
     return
 

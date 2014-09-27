@@ -372,8 +372,9 @@
         $scope.blah = "\u0D1C";
         console.log($scope.blah);
       });
-      $scope.yolo = function(id) {
+      $scope.yolo = function(keycode, unicode) {
         $scope.showchakra = !$scope.showchakra;
+        $scope.currentkey = unicode;
       };
     }
   ]);

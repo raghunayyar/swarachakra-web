@@ -38,7 +38,7 @@
           <thead></thead>
           <tbody>
             <tr ng-repeat="data in onscreen | limitTo: 4">
-              <td ng-repeat="row in data" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode)" ng-mouseup="yolo(row.keycode)">
+              <td ng-repeat="row in data" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)">
                 <span>{{ row.unicode }}</span>
               </td>
             </tr>
@@ -51,22 +51,22 @@
           <thead></thead>
           <tbody>
             <tr>
-              <td ng-repeat="row in onscreen[4]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode)" ng-mouseup="yolo(row.keycode)" ng-click="share(row.unicode)">
+              <td ng-repeat="row in onscreen[4]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)" ng-click="share(row.unicode)">
                 <span>{{ row.unicode }}</span>
               </td>
             </tr>
             <tr>
-              <td ng-repeat="row in onscreen[5]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}"ng-mousedown="yolo(row.keycode)" ng-mouseup="yolo(row.keycode)">
+              <td ng-repeat="row in onscreen[5]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)">
                 <span>{{ row.unicode }}</span>
               </td>
             </tr>
             <tr>
-              <td ng-repeat="row in onscreen[6]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode)" ng-mouseup="yolo(row.keycode)">
+              <td ng-repeat="row in onscreen[6]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)">
                 <span>{{ row.unicode }}</span>
               </td>
             </tr>
             <tr>
-              <td ng-repeat="row in onscreen[7]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode)" ng-mouseup="yolo(row.keycode)">
+              <td ng-repeat="row in onscreen[7]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}"ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)">
                 <span>{{ row.unicode }}</span>
               </td>
             </tr>
@@ -157,6 +157,8 @@
         <span>f</span>
       </li>
     </ul>
-    <div id="innerchakra"></div>
+    <div id="innerchakra">
+      <h6>{{ currentkey }}</h6>
+    </div>
   </div>
 </div>
