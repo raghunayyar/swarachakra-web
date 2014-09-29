@@ -1,8 +1,11 @@
 <div ng-controller="TextareaController" id="textarea">
-  <!--<textarea swarachakra-timeout-change="save()" ng-model="content" autofocus tabindex="-1">
+  <textarea swarachakra-timeout-change="save()" ng-model="content" autofocus tabindex="-1">
   </textarea>
-</div>-->
-<div ng-controller="KeyboardController" id="keyboard" ng-init="showchakra = false">
+</div>
+<div 
+  ng-controller="KeyboardController"
+  id="keyboard"
+  ng-init="showchakra = false; frame2 = false; frame1 = true">
 <!-- The Keyboard Container -->
   <div id="keyboardcontainer">
     <div class="header">
@@ -13,27 +16,27 @@
     </div>
     <div>
       <!-- First Column should be here. 1x5-->
-      <div class="firstcolumn">
+      <div class="firstcolumn frame1">
         <table>
           <thead></thead>
           <tbody>
             <tr>
-              <td><span>dd</span></td>
+              <td><span>.</span></td>
             </tr>
             <tr>
-              <td><span>dd</span></td>
+              <td><span>,</span></td>
             </tr>
             <tr>
-              <td><span>dd</span></td>
+              <td><span>!</span></td>
             </tr>
             <tr>
-              <td><span>dd</span></td>
+              <td><span>?</span></td>
             </tr>
           </tbody>
         </table>
       </div>
       <!-- First 5x5 table for the Swarachakra keys. 5x5-->
-      <div class="maintable1">
+      <div class="maintable1 frame1" ng-show="frame1">
         <table>
           <thead></thead>
           <tbody>
@@ -46,7 +49,7 @@
         </table>
       </div>
       <!-- Second 5x5 table for the Swarachakra keys. 5x5-->
-      <div class="maintable2">
+      <div class="maintable2 frame1" ng-show="frame1">
         <table>
           <thead></thead>
           <tbody>
@@ -73,13 +76,70 @@
           </tbody>
         </table>
       </div>
-      <!-- Last Column should be here. 1x5 -->
-      <div class="lastcolumn">
+
+      <!-- Third 5x5 table for the Swarachakra keys. 5x5, opens on shift selection-->
+      <div class="maintable1 frame2" ng-show="frame2">
         <table>
           <thead></thead>
           <tbody>
             <tr>
-              <td><span>dd</span></td>
+              <td ng-repeat="row in onscreen[8]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)" ng-click="share(row.unicode)">
+                <span>{{ row.unicode }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td ng-repeat="row in onscreen[8]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)">
+                <span>{{ row.unicode }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td ng-repeat="row in onscreen[9]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)">
+                <span>{{ row.unicode }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td ng-repeat="row in onscreen[10]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}"ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)">
+                <span>{{ row.unicode }}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Third 5x5 table for the Swarachakra keys. 5x5, opens on shift selection-->
+      <div class="maintable2 frame2" ng-show="frame2">
+        <table>
+          <thead></thead>
+          <tbody>
+            <tr>
+              <td ng-repeat="row in onscreen[11]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)" ng-click="share(row.unicode)">
+                <span>{{ row.unicode }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td ng-repeat="row in onscreen[12]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)">
+                <span>{{ row.unicode }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td ng-repeat="row in onscreen[13]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)">
+                <span>{{ row.unicode }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td ng-repeat="row in onscreen[14]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}"ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)">
+                <span>{{ row.unicode }}</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Last Column should be here. 1x5 -->
+      <div class="lastcolumn frame1">
+        <table>
+          <thead></thead>
+          <tbody>
+            <tr>
+              <td><span><i class="fa fa-remove"></i></span></td>
             </tr>
             <tr>
               <td><span>dd</span></td>
@@ -99,7 +159,11 @@
           <thead></thead>
           <tbody>
             <tr>
-              <td><span>aa</span></td>
+              <td ng-click="frame1 = !frame1; frame2 = !frame2">
+                <span>
+                  <i class="fa fa-arrow-up"></i>
+                 </span>
+              </td>
               <td><span>aa</span></td>
               <td><span>aa</span></td>
               <td id="spacebar">

@@ -465,6 +465,11 @@ app.controller "KeyboardController", [
       $scope.showchakra = !$scope.showchakra
       $scope.currentkey = unicode
       return
+
+    $scope.shifttable = () ->
+      console.log 'yolo'
+      $scope.frame1 = !$scope.frame1
+      return
     return
 
 ]

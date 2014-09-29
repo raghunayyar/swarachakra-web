@@ -4,7 +4,6 @@ app.controller "KeyboardController", [
   "LanguageModel"
   "$sce"
   ($scope, Restangular, LanguageModel, $sce) ->
-    languageResource = undefined
     $scope.languages = LanguageModel.getAll()
     languageResource = Restangular.one("languages")
     languageResource.getList("all").then (languageobject) ->
@@ -389,6 +388,11 @@ app.controller "KeyboardController", [
     $scope.yolo = (keycode,unicode) ->
       $scope.showchakra = !$scope.showchakra
       $scope.currentkey = unicode
+      return
+
+    $scope.shifttable = () ->
+      console.log 'yolo'
+      $scope.frame1 = !$scope.frame1
       return
     return
 

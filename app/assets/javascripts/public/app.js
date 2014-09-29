@@ -376,6 +376,10 @@
         $scope.showchakra = !$scope.showchakra;
         $scope.currentkey = unicode;
       };
+      $scope.shifttable = function() {
+        console.log('yolo');
+        $scope.frame1 = !$scope.frame1;
+      };
     }
   ]);
 
