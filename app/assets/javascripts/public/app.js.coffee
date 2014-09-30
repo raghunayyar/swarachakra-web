@@ -79,7 +79,6 @@ app.controller "KeyboardController", [
   "LanguageModel"
   "$sce"
   ($scope, Restangular, LanguageModel, $sce) ->
-    languageResource = undefined
     $scope.languages = LanguageModel.getAll()
     languageResource = Restangular.one("languages")
     languageResource.getList("all").then (languageobject) ->
@@ -486,6 +485,7 @@ app.controller "TextareaController",
         content = $scope.content
         SaveModel.add content
         return
+
       return
   ]
 # Place all the behaviors and hooks related to the matching controller here.

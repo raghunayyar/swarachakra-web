@@ -1,6 +1,8 @@
 <div ng-controller="TextareaController" id="textarea">
-  <textarea swarachakra-timeout-change="save()" ng-model="content" autofocus tabindex="-1">
+  <textarea swarachakra-timeout-change="save()" ng-model="content" autofocus tabindex="-1" readonly="false">
   </textarea>
+  <input type="checkbox" id="togglephysicalkeyboard" ng-checked="togglephysicalkeyboard" />
+  <label for="togglephysicalkeyboard">Toggle Keyboard</label>
 </div>
 <div 
   ng-controller="KeyboardController"
@@ -21,16 +23,16 @@
           <thead></thead>
           <tbody>
             <tr>
-              <td><span>.</span></td>
+              <td ng-click="sharetext('.')"><span>.</span></td>
             </tr>
             <tr>
-              <td><span>,</span></td>
+              <td ng-click="sharetext(',')"><span>,</span></td>
             </tr>
             <tr>
-              <td><span>!</span></td>
+              <td ng-click="sharetext('!')"><span>!</span></td>
             </tr>
             <tr>
-              <td><span>?</span></td>
+              <td ng-click="sharetext('?')"><span>?</span></td>
             </tr>
           </tbody>
         </table>
@@ -41,7 +43,7 @@
           <thead></thead>
           <tbody>
             <tr ng-repeat="data in onscreen | limitTo: 4">
-              <td ng-repeat="row in data" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)">
+              <td ng-repeat="row in data" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)" ng-click="sharetext(row.unicode)">
                 <span>{{ row.unicode }}</span>
               </td>
             </tr>
@@ -54,22 +56,22 @@
           <thead></thead>
           <tbody>
             <tr>
-              <td ng-repeat="row in onscreen[4]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)" ng-click="share(row.unicode)">
+              <td ng-repeat="row in onscreen[4]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)" ng-click="sharetext(row.unicode)" ng-click="share(row.unicode)">
                 <span>{{ row.unicode }}</span>
               </td>
             </tr>
             <tr>
-              <td ng-repeat="row in onscreen[5]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)">
+              <td ng-repeat="row in onscreen[5]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)" ng-click="sharetext(row.unicode)">
                 <span>{{ row.unicode }}</span>
               </td>
             </tr>
             <tr>
-              <td ng-repeat="row in onscreen[6]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)">
+              <td ng-repeat="row in onscreen[6]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)" ng-click="sharetext(row.unicode)">
                 <span>{{ row.unicode }}</span>
               </td>
             </tr>
             <tr>
-              <td ng-repeat="row in onscreen[7]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}"ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)">
+              <td ng-repeat="row in onscreen[7]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}"ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)" ng-click="sharetext(row.unicode)">
                 <span>{{ row.unicode }}</span>
               </td>
             </tr>
@@ -83,22 +85,22 @@
           <thead></thead>
           <tbody>
             <tr>
-              <td ng-repeat="row in onscreen[8]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)" ng-click="share(row.unicode)">
+              <td ng-repeat="row in onscreen[8]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)" ng-click="sharetext(row.unicode)">
                 <span>{{ row.unicode }}</span>
               </td>
             </tr>
             <tr>
-              <td ng-repeat="row in onscreen[8]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)">
+              <td ng-repeat="row in onscreen[8]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)" ng-click="sharetext(row.unicode)">
                 <span>{{ row.unicode }}</span>
               </td>
             </tr>
             <tr>
-              <td ng-repeat="row in onscreen[9]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)">
+              <td ng-repeat="row in onscreen[9]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)" ng-click="sharetext(row.unicode)">
                 <span>{{ row.unicode }}</span>
               </td>
             </tr>
             <tr>
-              <td ng-repeat="row in onscreen[10]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}"ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)">
+              <td ng-repeat="row in onscreen[10]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}"ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)" ng-click="sharetext(row.unicode)">
                 <span>{{ row.unicode }}</span>
               </td>
             </tr>
@@ -111,22 +113,22 @@
           <thead></thead>
           <tbody>
             <tr>
-              <td ng-repeat="row in onscreen[11]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)" ng-click="share(row.unicode)">
+              <td ng-repeat="row in onscreen[11]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)" ng-click="sharetext(row.unicode)">
                 <span>{{ row.unicode }}</span>
               </td>
             </tr>
             <tr>
-              <td ng-repeat="row in onscreen[12]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)">
+              <td ng-repeat="row in onscreen[12]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)" ng-click="sharetext(row.unicode)">
                 <span>{{ row.unicode }}</span>
               </td>
             </tr>
             <tr>
-              <td ng-repeat="row in onscreen[13]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)">
+              <td ng-repeat="row in onscreen[13]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)" ng-click="sharetext(row.unicode)">
                 <span>{{ row.unicode }}</span>
               </td>
             </tr>
             <tr>
-              <td ng-repeat="row in onscreen[14]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}"ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)">
+              <td ng-repeat="row in onscreen[14]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}"ng-mousedown="yolo(row.keycode, row.unicode)" ng-mouseup="yolo(row.keycode, row.unicode)" ng-click="sharetext(row.unicode)">
                 <span>{{ row.unicode }}</span>
               </td>
             </tr>
@@ -139,7 +141,7 @@
           <thead></thead>
           <tbody>
             <tr>
-              <td><span><i class="fa fa-remove"></i></span></td>
+              <td ng-click="delete()"><span><i class="fa fa-remove"></i></span></td>
             </tr>
             <tr>
               <td><span>dd</span></td>
@@ -166,7 +168,7 @@
               </td>
               <td><span>aa</span></td>
               <td><span>aa</span></td>
-              <td id="spacebar">
+              <td id="spacebar" ng-click="sharetext(' ')">
                 <span></span>
               </td>
               <td><span>aa</span></td>

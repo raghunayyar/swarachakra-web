@@ -60,7 +60,6 @@
   app.controller("KeyboardController", [
     "$scope", "Restangular", "LanguageModel", "$sce", function($scope, Restangular, LanguageModel, $sce) {
       var languageResource;
-      languageResource = void 0;
       $scope.languages = LanguageModel.getAll();
       languageResource = Restangular.one("languages");
       languageResource.getList("all").then(function(languageobject) {

@@ -11,5 +11,6 @@ app.controller "TextareaController",
         content = $scope.content
         SaveModel.add content
         return
+
       return
   ]

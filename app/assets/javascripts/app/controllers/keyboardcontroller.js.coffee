@@ -394,6 +394,9 @@ app.controller "KeyboardController", [
       console.log 'yolo'
       $scope.frame1 = !$scope.frame1
       return
+
+    $scope.sharetext = -> () ->
+      return
     return
 
 ]
