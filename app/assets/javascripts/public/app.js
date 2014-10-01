@@ -64,27 +64,26 @@
       languageResource = Restangular.one("languages");
       angular.element('#chakra').css('display', 'none');
       languageResource.getList("all").then(function(languageobject) {
-        var i, j, k;
+        var i, j, k, totaljuniorrarray;
         LanguageModel.addAll(languageobject);
         $scope.currentlanguage = $scope.languages[0].name;
+        totaljuniorrarray = Math.ceil($scope.languages[0].csv.length / 5);
         $scope.masterarray = [];
-        i = 0;
-        while (i < 11) {
+        k =0;
+        for (i=0; i<totaljuniorrarray; i++) {
           $scope.juniorarray = new Array(5);
-          k = 0;
-          while (k < 5) {
-            j = 0;
-            while (j < $scope.languages[0].csv.length) {
+          for (j=k; j<$scope.languages[0].csv.length; j++) {
+             if (j%5 != 0) {
               $scope.juniorarray[j] = $scope.languages[0].csv[j];
-              j++;
-            }
-            k++;
+             } else if (j=0) {
+              continue;
+             } else {
+              k = j
+              break;
+             }
+             $scope.masterarray[i] = $scope.juniorarray;
           }
-          $scope.masterarray[i] = $scope.juniorarray;
-          i++;
         }
-        console.log($scope.masterarray);
-        console.log($scope.languages);
         $scope.onscreen = [
           [
             {
@@ -388,6 +387,7 @@
             }, {}, {}
           ]
         ];
+        console.log($scope.onscreen);
       });
       $scope.displaychakra = function(keycode, unicode, event) {
         angular.element('#chakra').css('left', event.screenX - 70).css('top', event.screenY - 180).css('display', 'block');

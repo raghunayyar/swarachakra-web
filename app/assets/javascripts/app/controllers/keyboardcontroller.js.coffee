@@ -10,11 +10,12 @@ app.controller "KeyboardController", [
     languageResource.getList("all").then (languageobject) ->
       LanguageModel.addAll languageobject
       $scope.currentlanguage = $scope.languages[0].name
+      totaljuniorrarray = Math.ceil $scope.languages[0].csv.length/5
       # Static keyboard, the code should generate this form of data structure.
       $scope.masterarray = []
       i = 0
 
-      while i < 11
+      while i < totaljuniorrarray
         $scope.juniorarray = new Array(5)
         k = 0
         while k < 5

@@ -199,7 +199,11 @@
 				top: 15px;
 				margin-left: -5px;
 			}
-		
+			span {
+				&:active {
+					color:#333;
+				}
+			}
 		}
 	}
 }
