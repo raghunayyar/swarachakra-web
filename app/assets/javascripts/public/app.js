@@ -64,6 +64,17 @@
       languageResource = Restangular.one("languages");
       languageResource.getList("all").then(function(languageobject) {
         LanguageModel.addAll(languageobject);
+        $scope.masterarray = [];
+        for (var i=0; i<11; i++) {
+          $scope.juniorarray = new Array(5);
+          for (var k=0; k<5; k++) {
+            for (var j=0;j<$scope.languages[0].csv.length;j++) { 
+                $scope.juniorarray[j] = $scope.languages[0].csv[j];
+              }
+            }
+          $scope.masterarray[i] = $scope.juniorarray;
+        }
+        console.log($scope.masterarray);
         console.log($scope.languages);
         $scope.onscreen = [
           [
