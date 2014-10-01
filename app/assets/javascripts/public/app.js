@@ -66,7 +66,7 @@
       languageResource.getList("all").then(function(languageobject) {
         var i, j, k;
         LanguageModel.addAll(languageobject);
-        console.log($scope.languages);
+        $scope.currentlanguage = $scope.languages[0].name;
         $scope.masterarray = [];
         i = 0;
         while (i < 11) {

@@ -9,7 +9,7 @@ app.controller "KeyboardController", [
     angular.element('#chakra').css('display', 'none')
     languageResource.getList("all").then (languageobject) ->
       LanguageModel.addAll languageobject
-      console.log $scope.languages
+      $scope.currentlanguage = $scope.languages[0].name
       # Static keyboard, the code should generate this form of data structure.
       $scope.masterarray = []
       i = 0

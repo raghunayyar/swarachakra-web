@@ -11,7 +11,7 @@
 <!-- The Keyboard Container -->
   <div id="keyboardcontainer">
     <div class="header">
-      <strong class="languagename">Language: <span>Malayalam</span></strong>
+      <strong class="languagename">Language: <span>{{ currentlanguage }}</span></strong>
       <div class="toggler">
         <i class="fa fa-angle-down"></i>
       </div>
@@ -166,7 +166,11 @@
                   <i class="fa fa-arrow-up"></i>
                  </span>
               </td>
-              <td><span>aa</span></td>
+              <td>
+                <span>
+                  <strong>LS</strong> <!-- Need Better Icons for switching Languages -->
+                </span>
+              </td>
               <td><span>aa</span></td>
               <td id="spacebar" ng-click="sharetext(' ')">
                 <span></span>
