@@ -395,7 +395,6 @@
         $scope.currentkey = unicode;
       };
       $scope.hidechakra = function() {
-        console.log('blah');
         angular.element('#chakra').css('display', 'none');
       };
       $scope.shifttable = function() {

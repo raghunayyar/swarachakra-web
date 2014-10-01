@@ -482,7 +482,6 @@ app.controller "KeyboardController", [
       return
 
     $scope.hidechakra = () ->
-      console.log 'blah'
       angular.element('#chakra').css('display', 'none')
       return
 
