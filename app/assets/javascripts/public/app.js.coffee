@@ -81,6 +81,7 @@ app.controller "KeyboardController", [
   ($scope, Restangular, LanguageModel, $sce) ->
     $scope.languages = LanguageModel.getAll()
     languageResource = Restangular.one("languages")
+    angular.element('#chakra').css('display', 'none')
     languageResource.getList("all").then (languageobject) ->
       LanguageModel.addAll languageobject
       console.log $scope.languages
@@ -473,16 +474,19 @@ app.controller "KeyboardController", [
           {}
         ]
       ]
-      $scope.blah = "\u0D1C"
-      console.log $scope.blah
       return
-    $scope.togglechakra = (keycode, unicode) ->
-      $scope.showchakra = not $scope.showchakra
+    $scope.displaychakra = (keycode, unicode, event) ->
+      angular.element('#chakra').css('left', event.screenX-70).css('top', event.screenY-180).css('display', 'block')
+      angular.element('#innerchakra').css('position', 'absolute')
       $scope.currentkey = unicode
       return
 
+    $scope.hidechakra = () ->
+      console.log 'blah'
+      angular.element('#chakra').css('display', 'none')
+      return
+
     $scope.shifttable = () ->
-      console.log 'yolo'
       $scope.frame1 = !$scope.frame1
       return
 

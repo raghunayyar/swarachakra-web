@@ -62,6 +62,7 @@
       var languageResource;
       $scope.languages = LanguageModel.getAll();
       languageResource = Restangular.one("languages");
+      angular.element('#chakra').css('display', 'none');
       languageResource.getList("all").then(function(languageobject) {
         var i, j, k;
         LanguageModel.addAll(languageobject);
@@ -387,15 +388,17 @@
             }, {}, {}
           ]
         ];
-        $scope.blah = "\u0D1C";
-        console.log($scope.blah);
       });
-      $scope.togglechakra = function(keycode, unicode) {
-        $scope.showchakra = !$scope.showchakra;
+      $scope.displaychakra = function(keycode, unicode, event) {
+        angular.element('#chakra').css('left', event.screenX - 70).css('top', event.screenY - 180).css('display', 'block');
+        angular.element('#innerchakra').css('position', 'absolute');
         $scope.currentkey = unicode;
       };
+      $scope.hidechakra = function() {
+        console.log('blah');
+        angular.element('#chakra').css('display', 'none');
+      };
       $scope.shifttable = function() {
-        console.log('yolo');
         $scope.frame1 = !$scope.frame1;
       };
       $scope.sharetext = function() {
