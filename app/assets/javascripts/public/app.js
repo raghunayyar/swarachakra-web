@@ -63,16 +63,24 @@
       $scope.languages = LanguageModel.getAll();
       languageResource = Restangular.one("languages");
       languageResource.getList("all").then(function(languageobject) {
+        var i, j, k;
         LanguageModel.addAll(languageobject);
+        console.log($scope.languages);
         $scope.masterarray = [];
-        for (var i=0; i<11; i++) {
+        i = 0;
+        while (i < 11) {
           $scope.juniorarray = new Array(5);
-          for (var k=0; k<5; k++) {
-            for (var j=0;j<$scope.languages[0].csv.length;j++) { 
-                $scope.juniorarray[j] = $scope.languages[0].csv[j];
-              }
+          k = 0;
+          while (k < 5) {
+            j = 0;
+            while (j < $scope.languages[0].csv.length) {
+              $scope.juniorarray[j] = $scope.languages[0].csv[j];
+              j++;
             }
+            k++;
+          }
           $scope.masterarray[i] = $scope.juniorarray;
+          i++;
         }
         console.log($scope.masterarray);
         console.log($scope.languages);
@@ -382,13 +390,16 @@
         $scope.blah = "\u0D1C";
         console.log($scope.blah);
       });
-      $scope.yolo = function(keycode, unicode) {
+      $scope.togglechakra = function(keycode, unicode) {
         $scope.showchakra = !$scope.showchakra;
         $scope.currentkey = unicode;
       };
       $scope.shifttable = function() {
         console.log('yolo');
         $scope.frame1 = !$scope.frame1;
+      };
+      $scope.sharetext = function() {
+        return function() {};
       };
     }
   ]);

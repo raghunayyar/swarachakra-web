@@ -85,6 +85,22 @@ app.controller "KeyboardController", [
       LanguageModel.addAll languageobject
       console.log $scope.languages
       # Static keyboard, the code should generate this form of data structure.
+      $scope.masterarray = []
+      i = 0
+
+      while i < 11
+        $scope.juniorarray = new Array(5)
+        k = 0
+        while k < 5
+          j = 0
+          while j < $scope.languages[0].csv.length
+            $scope.juniorarray[j] = $scope.languages[0].csv[j]
+            j++
+          k++
+        $scope.masterarray[i] = $scope.juniorarray
+        i++
+      console.log $scope.masterarray
+      console.log $scope.languages
       $scope.onscreen = [
         [
           {
@@ -460,14 +476,17 @@ app.controller "KeyboardController", [
       $scope.blah = "\u0D1C"
       console.log $scope.blah
       return
-    $scope.yolo = (keycode,unicode) ->
-      $scope.showchakra = !$scope.showchakra
+    $scope.togglechakra = (keycode, unicode) ->
+      $scope.showchakra = not $scope.showchakra
       $scope.currentkey = unicode
       return
 
     $scope.shifttable = () ->
       console.log 'yolo'
       $scope.frame1 = !$scope.frame1
+      return
+
+    $scope.sharetext = -> () ->
       return
     return
 
