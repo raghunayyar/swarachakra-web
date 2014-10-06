@@ -10,13 +10,13 @@
   ng-init="frame2 = false; frame1 = true">
 <!-- The Keyboard Container -->
   <div id="keyboardcontainer">
-    <div class="header">
+    <div class="header" ng-click="toggledisplayofkeyboard = !toggledisplayofkeyboard">
       <strong class="languagename">Language: <span>{{ currentlanguage }}</span></strong>
       <div class="toggler">
-        <i class="fa fa-angle-down"></i>
+        <span>-</span>
       </div>
     </div>
-    <div>
+    <div ng-show="toggledisplayofkeyboard">
       <!-- First Column should be here. 1x5-->
       <div class="firstcolumn frame1">
         <table>
@@ -163,7 +163,7 @@
             <tr>
               <td ng-click="frame1 = !frame1; frame2 = !frame2">
                 <span>
-                  <i class="fa fa-arrow-up"></i>
+                  <span>-</span>
                  </span>
               </td>
               <td>
