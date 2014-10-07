@@ -15,8 +15,6 @@ app.controller "KeyboardController", [
       KeyboardModel.addlanguage languageobject
       $scope.onscreen = KeyboardModel.getallkeys()
 
-      console.log $scope.onscreen
-
       # Return Keys of Individual Tables
       $scope.firstmaintablekeys = KeyboardModel.maintablelayout1()
       $scope.secondmaintablekeys = KeyboardModel.maintablelayout2()
@@ -26,7 +24,9 @@ app.controller "KeyboardController", [
       $scope.firsttablekeys = KeyboardModel.firsttablelayout()
       $scope.lasttablekeys = KeyboardModel.lasttablelayout()
 
-      $scope.lastrowkeys = KeyboardModel.lastrowlayout()
+      $scope.lastrowleftkeys = KeyboardModel.lasttableleftlayout()
+      $scope.lastrowrightkeys = KeyboardModel.lasttablerightlayout()
+      console.log $scope.lastrowrightkeys
 
 
       # Todo : Current Language should be selected one.

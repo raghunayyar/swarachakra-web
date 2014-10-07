@@ -21,7 +21,6 @@ app.factory "KeyboardModel", ->
     getallkeys: () ->
       currentlanguage = @languageobject[1] # ToDO: implement selection of language.
 
-      console.log currentlanguage.name
       totalrows = currentlanguage.csv.length
       grouped = []
       i = 0
@@ -35,7 +34,12 @@ app.factory "KeyboardModel", ->
       grouped
 
     firsttablelayout: (language) ->
-      return
+      i = 0
+      table = []
+      while i < 4
+        table[i] = @keys[8][i]
+        i++
+      return table
 
     maintablelayout1: (language) ->
       i = 0
@@ -51,19 +55,36 @@ app.factory "KeyboardModel", ->
       while i < 8
         table[i-4] = @keys[i]
         i++
-      console.log table
       return table
 
     maintablelayout3: (id) ->
-        return
+      return
 
     maintablelayout4: (language) ->
       return
 
-    lasttablelayout: (id) ->
-      return
+    lasttableleftlayout: (id) ->
+      table = {}
+      table = @keys[8][4]
+      return table
 
-    lastrowlayout: (id) ->
+    lasttablerightlayout: (id) ->
+      table = []
+      i = 0
+      while i < 3
+        table[i] = @keys[10][i]
+        i++
+      return table
+
+    lasttablelayout: (id) ->
+      table = []
+      i = 2
+      while i < 5
+        table[i-2] = @keys[9][i]
+        i++
+      return table
+
+    swarachakrakeys: () ->
       return
 
   new KeyboardModel()

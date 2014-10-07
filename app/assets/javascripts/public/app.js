@@ -73,14 +73,15 @@
         LanguageModel.addAll(languageobject);
         KeyboardModel.addlanguage(languageobject);
         $scope.onscreen = KeyboardModel.getallkeys();
-        console.log($scope.onscreen);
         $scope.firstmaintablekeys = KeyboardModel.maintablelayout1();
         $scope.secondmaintablekeys = KeyboardModel.maintablelayout2();
         $scope.thirdmaintablekeys = KeyboardModel.maintablelayout3();
         $scope.forthmaintablekeys = KeyboardModel.maintablelayout4();
         $scope.firsttablekeys = KeyboardModel.firsttablelayout();
         $scope.lasttablekeys = KeyboardModel.lasttablelayout();
-        $scope.lastrowkeys = KeyboardModel.lastrowlayout();
+        $scope.lastrowleftkeys = KeyboardModel.lasttableleftlayout();
+        $scope.lastrowrightkeys = KeyboardModel.lasttablerightlayout();
+        console.log($scope.lastrowrightkeys);
         $scope.currentlanguage = $scope.languages[0];
         $scope.currentlanguagename = $scope.currentlanguage.name;
       });
@@ -125,7 +126,6 @@
       getallkeys: function() {
         var currentlanguage, div, grouped, i, mod, totalrows;
         currentlanguage = this.languageobject[1];
-        console.log(currentlanguage.name);
         totalrows = currentlanguage.csv.length;
         grouped = [];
         i = 0;
@@ -141,7 +141,16 @@
         this.keys = grouped;
         return grouped;
       },
-      firsttablelayout: function(language) {},
+      firsttablelayout: function(language) {
+        var i, table;
+        i = 0;
+        table = [];
+        while (i < 4) {
+          table[i] = this.keys[8][i];
+          i++;
+        }
+        return table;
+      },
       maintablelayout1: function(language) {
         var i, table;
         i = 0;
@@ -160,13 +169,37 @@
           table[i - 4] = this.keys[i];
           i++;
         }
-        console.log(table);
         return table;
       },
       maintablelayout3: function(id) {},
       maintablelayout4: function(language) {},
-      lasttablelayout: function(id) {},
-      lastrowlayout: function(id) {}
+      lasttableleftlayout: function(id) {
+        var table;
+        table = {};
+        table = this.keys[8][4];
+        return table;
+      },
+      lasttablerightlayout: function(id) {
+        var i, table;
+        table = [];
+        i = 0;
+        while (i < 3) {
+          table[i] = this.keys[10][i];
+          i++;
+        }
+        return table;
+      },
+      lasttablelayout: function(id) {
+        var i, table;
+        table = [];
+        i = 2;
+        while (i < 5) {
+          table[i - 2] = this.keys[9][i];
+          i++;
+        }
+        return table;
+      },
+      swarachakrakeys: function() {}
     };
     return new KeyboardModel();
   });
