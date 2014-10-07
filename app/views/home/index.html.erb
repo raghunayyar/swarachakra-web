@@ -119,7 +119,7 @@
           <thead></thead>
           <tbody>
             <tr>
-              <td ng-click="delete()">
+              <td ng-click="delete()" data-keycode="54" data-chakra="0">
                 <span><i class="fa fa-remove"></i></span>
               </td>
             </tr>
@@ -137,7 +137,7 @@
           <thead></thead>
           <tbody>
             <tr>
-              <td ng-click="frame1 = !frame1; frame2 = !frame2">
+              <td ng-click="frame1 = !frame1; frame2 = !frame2" data-keycode="55" data-chakra="55">
                 <span>
                   <i class="fa fa-arrow-up"></i>
                  </span>
@@ -150,13 +150,13 @@
               <td data-keycode="{{ lastrowleftkeys.keycode }}" data-chakra="{{ lastrowleftkeys.chakra }}" ng-click="sharetext(lastrowleftkeys.unicode)">
                 <span>{{ lastrowleftkeys.unicode }}</span>
               </td>
-              <td id="spacebar" ng-click="sharetext(' ')">
+              <td id="spacebar" ng-click="sharetext(' ')" data-keycode="56" data-chakra="0">
                 <span></span>
               </td>
               <td ng-repeat="row in lastrowrightkeys" ng-click="sharetext(row.unicode)" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}">
                 <span>{{ row.unicode }}</span>
               </td>
-              <td class="enterkey">
+              <td class="enterkey" data-keycode="57" data-chakra="57">
                 <span>
                   <img src="/assets/enter.png" alt="En" />
                 </span>
