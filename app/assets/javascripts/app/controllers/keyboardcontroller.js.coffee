@@ -32,9 +32,6 @@ app.controller "KeyboardController", [
       # Todo : Current Language should be selected one.
       $scope.currentlanguage = $scope.languages[0]
       $scope.currentlanguagename = $scope.currentlanguage.name
-
-
-      
       return
 
     $scope.displaychakra = (keycode, unicode, event) ->

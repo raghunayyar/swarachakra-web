@@ -116,14 +116,15 @@
       this.keys = [];
       this.key = [];
       this.keyid = {};
+      this.languageobject = {};
     };
     KeyboardModel.prototype = {
       addlanguage: function(languageobject) {
-        this.keys = languageobject;
+        this.languageobject = languageobject;
       },
       getallkeys: function() {
         var currentlanguage, div, grouped, i, mod, totalrows;
-        currentlanguage = this.keys[1];
+        currentlanguage = this.languageobject[1];
         console.log(currentlanguage.name);
         totalrows = currentlanguage.csv.length;
         grouped = [];
@@ -137,11 +138,31 @@
           grouped[div][mod] = currentlanguage.csv[i];
           i++;
         }
+        this.keys = grouped;
         return grouped;
       },
       firsttablelayout: function(language) {},
-      maintablelayout1: function(language) {},
-      maintablelayout2: function(languages) {},
+      maintablelayout1: function(language) {
+        var i, table;
+        i = 0;
+        table = [];
+        while (i < 4) {
+          table[i] = this.keys[i];
+          i++;
+        }
+        return table;
+      },
+      maintablelayout2: function(languages) {
+        var i, table;
+        i = 4;
+        table = [];
+        while (i < 8) {
+          table[i - 4] = this.keys[i];
+          i++;
+        }
+        console.log(table);
+        return table;
+      },
       maintablelayout3: function(id) {},
       maintablelayout4: function(language) {},
       lasttablelayout: function(id) {},

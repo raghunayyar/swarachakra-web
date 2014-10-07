@@ -42,7 +42,7 @@
         <table>
           <thead></thead>
           <tbody>
-            <tr ng-repeat="data in onscreen | limitTo: 4">
+            <tr ng-repeat="data in firstmaintablekeys">
               <td ng-repeat="row in data" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="displaychakra(row.keycode, row.unicode, $event)" ng-mouseup="hidechakra()" ng-click="sharetext(row.unicode)">
                 <span ng-bind-html="row.unicode | unsafeFilter"></span>
               </td>
@@ -55,24 +55,9 @@
         <table>
           <thead></thead>
           <tbody>
-            <tr>
-              <td ng-repeat="row in onscreen[4]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="displaychakra(row.keycode, row.unicode, $event)" ng-mouseup="hidechakra()" ng-click="sharetext(row.unicode)" ng-click="share(row.unicode)">
-                <span ng-bind-html="row.unicode | unsafeFilter"></span>
-              </td>
-            </tr>
-            <tr>
-              <td ng-repeat="row in onscreen[5]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="displaychakra(row.keycode, row.unicode, $event)" ng-mouseup="hidechakra()" ng-click="sharetext(row.unicode)">
-                <span ng-bind-html="row.unicode | unsafeFilter"></span>
-              </td>
-            </tr>
-            <tr>
-              <td ng-repeat="row in onscreen[6]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="displaychakra(row.keycode, row.unicode, $event)" ng-mouseup="hidechakra()" ng-click="sharetext(row.unicode)">
-                <span ng-bind-html="row.unicode | unsafeFilter"></span>
-              </td>
-            </tr>
-            <tr>
-              <td ng-repeat="row in onscreen[7]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}"ng-mousedown="displaychakra(row.keycode, row.unicode, $event)" ng-mouseup="hidechakra()" ng-click="sharetext(row.unicode)">
-                <span ng-bind-html="row.unicode | unsafeFilter"></span>
+            <tr ng-repeat="data2 in secondmaintablekeys track by $index">
+              <td ng-repeat="row2 in data2" data-keycode="{{ row2.keycode }}" data-chakra="{{ row2.chakra }}" ng-mousedown="displaychakra(row2.keycode, row2.unicode, $event)" ng-mouseup="hidechakra()" ng-click="sharetext(row2.unicode)">
+                <span ng-bind-html="row2.unicode | unsafeFilter"></span>
               </td>
             </tr>
           </tbody>

@@ -111,9 +111,6 @@ app.controller "KeyboardController", [
       # Todo : Current Language should be selected one.
       $scope.currentlanguage = $scope.languages[0]
       $scope.currentlanguagename = $scope.currentlanguage.name
-
-
-      
       return
 
     $scope.displaychakra = (keycode, unicode, event) ->
@@ -163,15 +160,16 @@ app.factory "KeyboardModel", ->
     @keys = []
     @key = []
     @keyid = {}
+    @languageobject = {}
     return
 
   KeyboardModel:: =
     addlanguage: (languageobject) ->
-      @keys = languageobject
+      @languageobject = languageobject
       return
 
     getallkeys: () ->
-      currentlanguage = @keys[1]
+      currentlanguage = @languageobject[1] # ToDO: implement selection of language.
 
       console.log currentlanguage.name
       totalrows = currentlanguage.csv.length
@@ -183,16 +181,28 @@ app.factory "KeyboardModel", ->
         grouped[div] = []  if mod is 0
         grouped[div][mod] = currentlanguage.csv[i]
         i++
+      @keys = grouped
       grouped
 
     firsttablelayout: (language) ->
       return
 
     maintablelayout1: (language) ->
-      return
+      i = 0
+      table = []
+      while i < 4
+        table[i] = @keys[i]
+        i++
+      return table
 
     maintablelayout2: (languages) ->
-      return
+      i = 4
+      table = []
+      while i < 8
+        table[i-4] = @keys[i]
+        i++
+      console.log table
+      return table
 
     maintablelayout3: (id) ->
         return
