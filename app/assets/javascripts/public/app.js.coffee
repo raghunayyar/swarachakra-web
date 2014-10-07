@@ -81,26 +81,39 @@ app.controller "KeyboardController", [
   "$scope"
   "Restangular"
   "LanguageModel"
+  "KeyboardModel"
   "$sce"
-  ($scope, Restangular, LanguageModel, $sce) ->
-    languageResource = undefined
+  ($scope, Restangular, LanguageModel, KeyboardModel,$sce) ->
     $scope.languages = LanguageModel.getAll()
     languageResource = Restangular.one("languages")
     angular.element("#chakra").css "display", "none"
     languageResource.getList("all").then (languageobject) ->
-      LanguageModel.addAll languageobject
-      $scope.currentlanguage = $scope.languages[0].name
-      $scope.totalrows = $scope.languages[0].csv.length
-      grouped = []
-      i = 0
 
-      while i < $scope.totalrows
-        div = Math.floor(i / 5)
-        mod = i % 5
-        grouped[div] = []  if mod is 0
-        grouped[div][mod] = $scope.languages[0].csv[i]
-        i++
-      $scope.onscreen = grouped
+      LanguageModel.addAll languageobject
+
+      KeyboardModel.addlanguage languageobject
+      $scope.onscreen = KeyboardModel.getallkeys()
+
+      console.log $scope.onscreen
+
+      # Return Keys of Individual Tables
+      $scope.firstmaintablekeys = KeyboardModel.maintablelayout1()
+      $scope.secondmaintablekeys = KeyboardModel.maintablelayout2()
+      $scope.thirdmaintablekeys = KeyboardModel.maintablelayout3()
+      $scope.forthmaintablekeys = KeyboardModel.maintablelayout4()
+
+      $scope.firsttablekeys = KeyboardModel.firsttablelayout()
+      $scope.lasttablekeys = KeyboardModel.lasttablelayout()
+
+      $scope.lastrowkeys = KeyboardModel.lastrowlayout()
+
+
+      # Todo : Current Language should be selected one.
+      $scope.currentlanguage = $scope.languages[0]
+      $scope.currentlanguagename = $scope.currentlanguage.name
+
+
+      
       return
 
     $scope.displaychakra = (keycode, unicode, event) ->
@@ -119,6 +132,8 @@ app.controller "KeyboardController", [
 
     $scope.sharetext = ->
       return
+
+    return
 ]
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
@@ -136,6 +151,63 @@ app.controller "TextareaController",
 
       return
   ]
+# Place all the behaviors and hooks related to the matching controller here.
+# All this logic will automatically be available in application.js.
+# You can use CoffeeScript in this file: http://coffeescript.org/
+
+# This service should do the mapping from the CSV to the Keyboard.
+# This should be epic.
+
+app.factory "KeyboardModel", ->
+  KeyboardModel = ->
+    @keys = []
+    @key = []
+    @keyid = {}
+    return
+
+  KeyboardModel:: =
+    addlanguage: (languageobject) ->
+      @keys = languageobject
+      return
+
+    getallkeys: () ->
+      currentlanguage = @keys[1]
+
+      console.log currentlanguage.name
+      totalrows = currentlanguage.csv.length
+      grouped = []
+      i = 0
+      while i < totalrows
+        div = Math.floor(i / 5)
+        mod = i % 5
+        grouped[div] = []  if mod is 0
+        grouped[div][mod] = currentlanguage.csv[i]
+        i++
+      grouped
+
+    firsttablelayout: (language) ->
+      return
+
+    maintablelayout1: (language) ->
+      return
+
+    maintablelayout2: (languages) ->
+      return
+
+    maintablelayout3: (id) ->
+        return
+
+    maintablelayout4: (language) ->
+      return
+
+    lasttablelayout: (id) ->
+      return
+
+    lastrowlayout: (id) ->
+      return
+
+  new KeyboardModel()
+
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/

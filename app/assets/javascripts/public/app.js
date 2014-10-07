@@ -64,29 +64,25 @@
   ]);
 
   app.controller("KeyboardController", [
-    "$scope", "Restangular", "LanguageModel", "$sce", function($scope, Restangular, LanguageModel, $sce) {
+    "$scope", "Restangular", "LanguageModel", "KeyboardModel", "$sce", function($scope, Restangular, LanguageModel, KeyboardModel, $sce) {
       var languageResource;
-      languageResource = void 0;
       $scope.languages = LanguageModel.getAll();
       languageResource = Restangular.one("languages");
       angular.element("#chakra").css("display", "none");
       languageResource.getList("all").then(function(languageobject) {
-        var div, grouped, i, mod;
         LanguageModel.addAll(languageobject);
-        $scope.currentlanguage = $scope.languages[0].name;
-        $scope.totalrows = $scope.languages[0].csv.length;
-        grouped = [];
-        i = 0;
-        while (i < $scope.totalrows) {
-          div = Math.floor(i / 5);
-          mod = i % 5;
-          if (mod === 0) {
-            grouped[div] = [];
-          }
-          grouped[div][mod] = $scope.languages[0].csv[i];
-          i++;
-        }
-        $scope.onscreen = grouped;
+        KeyboardModel.addlanguage(languageobject);
+        $scope.onscreen = KeyboardModel.getallkeys();
+        console.log($scope.onscreen);
+        $scope.firstmaintablekeys = KeyboardModel.maintablelayout1();
+        $scope.secondmaintablekeys = KeyboardModel.maintablelayout2();
+        $scope.thirdmaintablekeys = KeyboardModel.maintablelayout3();
+        $scope.forthmaintablekeys = KeyboardModel.maintablelayout4();
+        $scope.firsttablekeys = KeyboardModel.firsttablelayout();
+        $scope.lasttablekeys = KeyboardModel.lasttablelayout();
+        $scope.lastrowkeys = KeyboardModel.lastrowlayout();
+        $scope.currentlanguage = $scope.languages[0];
+        $scope.currentlanguagename = $scope.currentlanguage.name;
       });
       $scope.displaychakra = function(keycode, unicode, event) {
         angular.element("#chakra").css("left", event.screenX - 70).css("top", event.screenY - 180).css("display", "block");
@@ -99,7 +95,7 @@
       $scope.shifttable = function() {
         $scope.frame1 = !$scope.frame1;
       };
-      return $scope.sharetext = function() {};
+      $scope.sharetext = function() {};
     }
   ]);
 
@@ -113,6 +109,46 @@
       };
     }
   ]);
+
+  app.factory("KeyboardModel", function() {
+    var KeyboardModel;
+    KeyboardModel = function() {
+      this.keys = [];
+      this.key = [];
+      this.keyid = {};
+    };
+    KeyboardModel.prototype = {
+      addlanguage: function(languageobject) {
+        this.keys = languageobject;
+      },
+      getallkeys: function() {
+        var currentlanguage, div, grouped, i, mod, totalrows;
+        currentlanguage = this.keys[1];
+        console.log(currentlanguage.name);
+        totalrows = currentlanguage.csv.length;
+        grouped = [];
+        i = 0;
+        while (i < totalrows) {
+          div = Math.floor(i / 5);
+          mod = i % 5;
+          if (mod === 0) {
+            grouped[div] = [];
+          }
+          grouped[div][mod] = currentlanguage.csv[i];
+          i++;
+        }
+        return grouped;
+      },
+      firsttablelayout: function(language) {},
+      maintablelayout1: function(language) {},
+      maintablelayout2: function(languages) {},
+      maintablelayout3: function(id) {},
+      maintablelayout4: function(language) {},
+      lasttablelayout: function(id) {},
+      lastrowlayout: function(id) {}
+    };
+    return new KeyboardModel();
+  });
 
   app.factory("LanguageModel", function() {
     var LanguageModel;

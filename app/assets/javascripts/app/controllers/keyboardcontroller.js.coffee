@@ -2,26 +2,39 @@ app.controller "KeyboardController", [
   "$scope"
   "Restangular"
   "LanguageModel"
+  "KeyboardModel"
   "$sce"
-  ($scope, Restangular, LanguageModel, $sce) ->
-    languageResource = undefined
+  ($scope, Restangular, LanguageModel, KeyboardModel,$sce) ->
     $scope.languages = LanguageModel.getAll()
     languageResource = Restangular.one("languages")
     angular.element("#chakra").css "display", "none"
     languageResource.getList("all").then (languageobject) ->
-      LanguageModel.addAll languageobject
-      $scope.currentlanguage = $scope.languages[0].name
-      $scope.totalrows = $scope.languages[0].csv.length
-      grouped = []
-      i = 0
 
-      while i < $scope.totalrows
-        div = Math.floor(i / 5)
-        mod = i % 5
-        grouped[div] = []  if mod is 0
-        grouped[div][mod] = $scope.languages[0].csv[i]
-        i++
-      $scope.onscreen = grouped
+      LanguageModel.addAll languageobject
+
+      KeyboardModel.addlanguage languageobject
+      $scope.onscreen = KeyboardModel.getallkeys()
+
+      console.log $scope.onscreen
+
+      # Return Keys of Individual Tables
+      $scope.firstmaintablekeys = KeyboardModel.maintablelayout1()
+      $scope.secondmaintablekeys = KeyboardModel.maintablelayout2()
+      $scope.thirdmaintablekeys = KeyboardModel.maintablelayout3()
+      $scope.forthmaintablekeys = KeyboardModel.maintablelayout4()
+
+      $scope.firsttablekeys = KeyboardModel.firsttablelayout()
+      $scope.lasttablekeys = KeyboardModel.lasttablelayout()
+
+      $scope.lastrowkeys = KeyboardModel.lastrowlayout()
+
+
+      # Todo : Current Language should be selected one.
+      $scope.currentlanguage = $scope.languages[0]
+      $scope.currentlanguagename = $scope.currentlanguage.name
+
+
+      
       return
 
     $scope.displaychakra = (keycode, unicode, event) ->
@@ -40,4 +53,6 @@ app.controller "KeyboardController", [
 
     $scope.sharetext = ->
       return
+
+    return
 ]

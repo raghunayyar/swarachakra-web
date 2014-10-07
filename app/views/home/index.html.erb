@@ -11,7 +11,7 @@
 <!-- The Keyboard Container -->
   <div id="keyboardcontainer">
     <div class="header" ng-click="toggledisplayofkeyboard = !toggledisplayofkeyboard">
-      <strong class="languagename">Language: <span>{{ currentlanguage }}</span></strong>
+      <strong class="languagename">Language: <span>{{ currentlanguagename }}</span></strong>
       <div class="toggler">
         <span>-</span>
       </div>
@@ -44,7 +44,7 @@
           <tbody>
             <tr ng-repeat="data in onscreen | limitTo: 4">
               <td ng-repeat="row in data" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="displaychakra(row.keycode, row.unicode, $event)" ng-mouseup="hidechakra()" ng-click="sharetext(row.unicode)">
-                <span>{{ row.unicode }}</span>
+                <span ng-bind-html="row.unicode | unsafeFilter"></span>
               </td>
             </tr>
           </tbody>
@@ -57,22 +57,22 @@
           <tbody>
             <tr>
               <td ng-repeat="row in onscreen[4]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="displaychakra(row.keycode, row.unicode, $event)" ng-mouseup="hidechakra()" ng-click="sharetext(row.unicode)" ng-click="share(row.unicode)">
-                <span>{{ row.unicode }}</span>
+                <span ng-bind-html="row.unicode | unsafeFilter"></span>
               </td>
             </tr>
             <tr>
               <td ng-repeat="row in onscreen[5]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="displaychakra(row.keycode, row.unicode, $event)" ng-mouseup="hidechakra()" ng-click="sharetext(row.unicode)">
-                <span>{{ row.unicode }}</span>
+                <span ng-bind-html="row.unicode | unsafeFilter"></span>
               </td>
             </tr>
             <tr>
               <td ng-repeat="row in onscreen[6]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="displaychakra(row.keycode, row.unicode, $event)" ng-mouseup="hidechakra()" ng-click="sharetext(row.unicode)">
-                <span>{{ row.unicode }}</span>
+                <span ng-bind-html="row.unicode | unsafeFilter"></span>
               </td>
             </tr>
             <tr>
               <td ng-repeat="row in onscreen[7]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}"ng-mousedown="displaychakra(row.keycode, row.unicode, $event)" ng-mouseup="hidechakra()" ng-click="sharetext(row.unicode)">
-                <span>{{ row.unicode }}</span>
+                <span ng-bind-html="row.unicode | unsafeFilter"></span>
               </td>
             </tr>
           </tbody>
@@ -86,22 +86,22 @@
           <tbody>
             <tr>
               <td ng-repeat="row in onscreen[8]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="displaychakra(row.keycode, row.unicode, $event)" ng-mouseup="hidechakra()" ng-click="sharetext(row.unicode)">
-                <span>{{ row.unicode }}</span>
+                <span ng-bind-html="row.unicode | unsafeFilter"></span>
               </td>
             </tr>
             <tr>
               <td ng-repeat="row in onscreen[8]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="displaychakra(row.keycode, row.unicode, $event)" ng-mouseup="hidechakra()" ng-click="sharetext(row.unicode)">
-                <span>{{ row.unicode }}</span>
+                <span ng-bind-html="row.unicode | unsafeFilter"></span>
               </td>
             </tr>
             <tr>
               <td ng-repeat="row in onscreen[9]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="displaychakra(row.keycode, row.unicode, $event)" ng-mouseup="hidechakra()" ng-click="sharetext(row.unicode)">
-                <span>{{ row.unicode }}</span>
+                <span ng-bind-html="row.unicode | unsafeFilter"></span>
               </td>
             </tr>
             <tr>
               <td ng-repeat="row in onscreen[10]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}"ng-mousedown="displaychakra(row.keycode, row.unicode, $event)" ng-mouseup="hidechakra()" ng-click="sharetext(row.unicode)">
-                <span>{{ row.unicode }}</span>
+                <span ng-bind-html="row.unicode | unsafeFilter"></span>
               </td>
             </tr>
           </tbody>
@@ -114,22 +114,22 @@
           <tbody>
             <tr>
               <td ng-repeat="row in onscreen[11]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="displaychakra(row.keycode, row.unicode, $event)" ng-mouseup="hidechakra()" ng-click="sharetext(row.unicode)">
-                <span>{{ row.unicode }}</span>
+                <span ng-bind-html="row.unicode | unsafeFilter"></span>
               </td>
             </tr>
             <tr>
               <td ng-repeat="row in onscreen[12]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="displaychakra(row.keycode, row.unicode, $event)" ng-mouseup="hidechakra()" ng-click="sharetext(row.unicode)">
-                <span>{{ row.unicode }}</span>
+                <span ng-bind-html="row.unicode | unsafeFilter"></span>
               </td>
             </tr>
             <tr>
               <td ng-repeat="row in onscreen[13]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="displaychakra(row.keycode, row.unicode, $event)" ng-mouseup="hidechakra()" ng-click="sharetext(row.unicode)">
-                <span>{{ row.unicode }}</span>
+                <span ng-bind-html="row.unicode | unsafeFilter"></span>
               </td>
             </tr>
             <tr>
               <td ng-repeat="row in onscreen[14]" data-keycode="{{ row.keycode }}" data-chakra="{{ row.chakra }}" ng-mousedown="displaychakra(row.keycode, row.unicode, $event)" ng-mouseup="hidechakra()" ng-click="sharetext(row.unicode)">
-                <span>{{ row.unicode }}</span>
+                <span ng-bind-html="row.unicode | unsafeFilter"></span>
               </td>
             </tr>
           </tbody>
@@ -163,10 +163,10 @@
             <tr>
               <td ng-click="frame1 = !frame1; frame2 = !frame2">
                 <span>
-                  <span>-</span>
+                  <i class="fa fa-arrow-up"></i>
                  </span>
               </td>
-              <td>
+              <td ng-click="languageswitcher != languageswitcher">
                 <span>
                   <strong>LS</strong> <!-- Need Better Icons for switching Languages -->
                 </span>
@@ -178,11 +178,23 @@
               <td><span>aa</span></td>
               <td><span>aa</span></td>
               <td><span>aa</span></td>
-              <td><span>aa</span></td>
+              <td class="enterkey">
+                <span>
+                  <img src="/assets/enter.png" alt="En" />
+                </span>
+              </td>
             </tr>
           </tbody>
         </table>
       </div>
+    </div>
+    <div ng-show="languageswitcher">
+      <ul>
+        <li ng-repeat="onelanguage in languagelist">
+          <input type="radio" />
+          <span>{{ onelanguage }}</span>
+        </li>
+      </ul>
     </div>
     <!--<div class="options">
       <strong>Available Languages</strong>
@@ -240,7 +252,7 @@
         </li>
       </ul>
       <div id="innerchakra">
-        <h6>{{ currentkey }}</h6>
+        <h6 ng-bind-html="currentkey | unsafeFilter"></h6>
       </div>
     </div>
 </div>
