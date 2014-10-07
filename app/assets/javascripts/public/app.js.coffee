@@ -88,10 +88,6 @@ app.controller "KeyboardController", [
     languageResource = Restangular.one("languages")
     angular.element("#chakra").css "display", "none"
     languageResource.getList("all").then (languageobject) ->
-      i = undefined
-      j = undefined
-      k = undefined
-      totaljuniorrarray = undefined
       LanguageModel.addAll languageobject
       $scope.currentlanguage = $scope.languages[0].name
       $scope.totalrows = $scope.languages[0].csv.length
@@ -105,7 +101,6 @@ app.controller "KeyboardController", [
         grouped[div][mod] = $scope.languages[0].csv[i]
         i++
       $scope.onscreen = grouped
-      console.log grouped
       return
 
     $scope.displaychakra = (keycode, unicode, event) ->
@@ -123,7 +118,7 @@ app.controller "KeyboardController", [
       return
 
     $scope.sharetext = ->
-      ->
+      return
 ]
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.

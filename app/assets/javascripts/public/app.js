@@ -71,11 +71,7 @@
       languageResource = Restangular.one("languages");
       angular.element("#chakra").css("display", "none");
       languageResource.getList("all").then(function(languageobject) {
-        var div, grouped, i, j, k, mod, totaljuniorrarray;
-        i = void 0;
-        j = void 0;
-        k = void 0;
-        totaljuniorrarray = void 0;
+        var div, grouped, i, mod;
         LanguageModel.addAll(languageobject);
         $scope.currentlanguage = $scope.languages[0].name;
         $scope.totalrows = $scope.languages[0].csv.length;
@@ -91,7 +87,6 @@
           i++;
         }
         $scope.onscreen = grouped;
-        console.log(grouped);
       });
       $scope.displaychakra = function(keycode, unicode, event) {
         angular.element("#chakra").css("left", event.screenX - 70).css("top", event.screenY - 180).css("display", "block");
@@ -104,9 +99,7 @@
       $scope.shifttable = function() {
         $scope.frame1 = !$scope.frame1;
       };
-      return $scope.sharetext = function() {
-        return function() {};
-      };
+      return $scope.sharetext = function() {};
     }
   ]);
 
